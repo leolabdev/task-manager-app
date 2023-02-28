@@ -1,4 +1,7 @@
 /dist
+dist
+./dist/*
+dist/*
 node_modules
 .idea
 .env
