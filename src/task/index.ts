@@ -1,17 +1,16 @@
 import {router} from "./task.router"
-import {userPath} from "./task.router"
-import {IUser,ICreateUser} from "./Task/task";
+import {taskPath} from "./task.router"
+import {ICreateTask,IUpdateTask,ITask} from "./Task/task";
 import {TaskService} from "./task.service";
-import {UserRole} from "./Task/userRole";
 
 export  {
-    router as userRouter,
-    userPath,
-    IUser,
-    ICreateUser,
+    router as taskRouter,
+    taskPath,
+    ITask,
+    ICreateTask,
     TaskService,
-    UserRole
+    IUpdateTask
 };
 
-// export {}
+
 

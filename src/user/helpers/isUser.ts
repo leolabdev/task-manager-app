@@ -1,4 +1,4 @@
-import {IUser} from "../../user/User/user";
+import {IUser} from "../User/user";
 
 export  function isUser(value: unknown): value is IUser {
     return typeof value === 'object'

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import {UserRole} from "../user";
+import {UserRole} from "@/user";
 
 
 // middleware for doing role-based permissions

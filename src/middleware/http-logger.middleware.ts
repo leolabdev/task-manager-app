@@ -1,6 +1,6 @@
 import morgan from 'morgan'
 
-import logger from '../common/logger'
+import logger from '@/common/logger'
 
 const httpLogger = morgan('tiny',
   {

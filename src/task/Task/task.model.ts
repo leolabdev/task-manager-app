@@ -1,5 +1,6 @@
 import mongoose, {Model} from "mongoose";
 import {ITask} from "./task";
+import {SchemaRelationsEnum} from "@/types/schema-relations-enum";
 
 
 
@@ -17,5 +18,5 @@ const taskSchema = new mongoose.Schema<ITask>({
 
 
 
-export const TaskModel: Model<ITask> = mongoose.model<ITask>("Task", taskSchema);
+export const TaskModel: Model<ITask> = mongoose.model<ITask>(SchemaRelationsEnum.TASK, taskSchema);
 

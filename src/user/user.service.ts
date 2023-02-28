@@ -5,7 +5,6 @@ import {MongoError} from "mongodb";
 
 export class UserService {
 
-
     getByUserName = async (username: string): Promise<IUser | null> =>  {
         try {
             return await UserModel.findOne({username}).exec();

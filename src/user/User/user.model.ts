@@ -1,6 +1,7 @@
 import mongoose, {Model} from "mongoose";
 import {IUser} from "./user";
 import {UserRole} from "./userRole";
+import {SchemaRelationsEnum} from "@/types/schema-relations-enum";
 
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -22,5 +23,5 @@ const userSchema = new mongoose.Schema<IUser>({
 
 
 
-export const UserModel: Model<IUser> = mongoose.model<IUser>("Task", userSchema);
+export const UserModel: Model<IUser> = mongoose.model<IUser>(SchemaRelationsEnum.USER, userSchema);
 

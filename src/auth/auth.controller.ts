@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import logger from '../common/logger'
-import {UserService} from "../user";
+import logger from '@/common/logger'
+import {UserService} from "@/user";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
-import HttpException from "../common/http-exception";
+import HttpException from "@/common/http-exception";
 
 
 class AuthController {
@@ -19,7 +19,7 @@ class AuthController {
         // Check if user with the username already exists
         const existingUser = await this.userService.getByUserName(username);
         if (existingUser) {
-            return res.status(400).json({ message: 'Task with that username already exists' });
+            return res.status(400).json({ message: 'User with that username already exists' });
         }
 
         // Create a new user
@@ -32,10 +32,10 @@ class AuthController {
         // Save user to database
         try {
             await this.userService.postNew(newUser);
-            res.status(201).json({ message: 'Task created successfully' });
+            res.status(201).json({ message: 'User created successfully' });
         } catch (err) {
             logger.error(err);
-            res.status(500).json({ message: 'Failed to create user' });
+            res.status(500).json({ message: 'Failed to create User' });
         }
     };
 
@@ -47,7 +47,7 @@ class AuthController {
         // console.log(existingUser);
 
         if (!existingUser) {
-            const error = new HttpException(400, 'Task with that username does not exist');
+            const error = new HttpException(400, 'User with that username does not exist');
             logger.error(error);
             return res.status(error.statusCode).json({ message: error.message });
         }

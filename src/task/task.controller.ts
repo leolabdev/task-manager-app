@@ -1,13 +1,13 @@
 import {NextFunction, Request, Response} from 'express'
 
-import logger from '../common/logger'
+import logger from '@/common/logger'
 import {ITask, ICreateTask, IUpdateTask} from "./Task/task";
-import HttpException from "../common/http-exception";
+import HttpException from "@/common/http-exception";
 import {MongoError} from "mongodb";
 import {createTaskValidation, updateTaskValidation} from "./helpers/taskValidation";
 import {TaskService} from "./task.service";
 import {isTask} from "./helpers/isTask";
-import {validateGetAllPaginationQuery} from "../common/validation/validateGetAllPaginationQuery";
+import {validateGetAllPaginationQuery} from "@/common/validation/validateGetAllPaginationQuery";
 
 
 
@@ -48,7 +48,7 @@ export class TaskController {
             const data: ITask | MongoError = await this.userService.postNew(value);
             if (data instanceof MongoError && data.code === 11000) {
                 if (data.code === 11000) {
-                    throw new HttpException(422, 'IUser already exists');
+                    throw new HttpException(422, 'Task already exists');
                 }
             }
             if (isTask(data)) {

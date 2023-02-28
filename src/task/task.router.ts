@@ -2,27 +2,27 @@ import express from 'express'
 import {TaskController} from './task.controller'
 import {authMiddleware} from "../middleware";
 import permit from "../middleware/authorization.middleware";
-import {UserRole} from "../user";
+import {UserRole} from "@/user";
 
 
 const router = express.Router()
-const userPath = '/users';
+const taskPath = '/users';
 
-const userController = new TaskController();
+const taskController = new TaskController();
 
 /* GET tasks */
-router.get('/', authMiddleware, permit(UserRole.basic), userController.getAllTasks)
+router.get('/', authMiddleware, permit(UserRole.basic), taskController.getAllTasks)
 //
 // /* GET task by id */
-router.get('/:id', userController.getById)
+router.get('/:id', taskController.getById)
 
-
-// /* GET task by name */
-router.get('/:username', userController.getByUsername)
+//
+// // /* GET task by name */
+// router.get('/:username', taskController.getByUsername)
 
 /* POST new task */
-router.post('/', userController.postNew)
+router.post('/', taskController.postNew)
 
-export { router , userPath }
+export { router , taskPath }
 
 

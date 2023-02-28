@@ -1,13 +1,12 @@
 import {NextFunction, Request, Response} from 'express'
-
-import logger from '../common/logger'
+import logger from '@/common/logger'
 import {ICreateUser, IUpdateUser, IUser} from "./User/user";
-import HttpException from "../common/http-exception";
+import HttpException from "@/common/http-exception";
 import {MongoError} from "mongodb";
 import {createUserValidation, updateUserValidation} from "./helpers/userValidation";
 import {UserService} from "./user.service";
 import {isUser} from "./helpers/isUser";
-import {validateGetAllPaginationQuery} from "../common/validation/validateGetAllPaginationQuery";
+import {validateGetAllPaginationQuery} from "@/common/validation/validateGetAllPaginationQuery";
 
 
 
@@ -68,7 +67,7 @@ export class UserController {
             const user = await this.userService.getById(id);
 
             if (!user) {
-                throw new HttpException(404, 'Task not found');
+                throw new HttpException(404, 'User not found');
             }
 
             res.status(200).json(user);
@@ -84,7 +83,7 @@ export class UserController {
             const user = await this.userService.getByUserName(username);
 
             if (!user) {
-                throw new HttpException(404, 'Task not found');
+                throw new HttpException(404, 'User not found');
             }
 
             res.status(200).json(user);
@@ -106,7 +105,7 @@ export class UserController {
             const { id } = req.params;
             const userToUpdate = await this.userService.getById(id);
             if (!userToUpdate) {
-                throw new HttpException(404, 'Task not found');
+                throw new HttpException(404, 'User not found');
             }
 
             const updatedUser = await this.userService.updateUser(id, value);
