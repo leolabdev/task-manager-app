@@ -44,7 +44,7 @@ export class UserController {
                 throw new HttpException(400, `Invalid input: ${error.message}`);
             }
 
-            const data: IUser | MongoError = await this.userService.postNew(value);
+            const data: IUser | MongoError = await this.userService.createNew(value);
             if (data instanceof MongoError) {
                 if (data.code === 11000) {
                     throw new HttpException(422, 'IUser already exists');

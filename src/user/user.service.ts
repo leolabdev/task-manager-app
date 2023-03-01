@@ -1,9 +1,20 @@
 import {ICreateUser, IUpdateUser, IUser} from "./User/user";
 import {UserModel} from "./User/user.model";
-import {MongoError} from "mongodb";
+import {DeleteResult, MongoError} from "mongodb";
+import {TaskCategoryService} from "@/taskCategory";
+import {TaskService} from "@/task";
+import {ObjectId, Schema} from "mongoose";
 
 
 export class UserService {
+
+    private taskCategoryService: TaskCategoryService;
+
+    constructor() {
+        this.taskCategoryService = new TaskCategoryService();
+    }
+
+
 
     getByUserName = async (username: string): Promise<IUser | null> =>  {
         try {
@@ -41,7 +52,7 @@ export class UserService {
     }
   }
 
-   postNew = async (userBody: ICreateUser): Promise<IUser | MongoError> =>{
+   createNew = async (userBody: ICreateUser): Promise<IUser | MongoError> =>{
     try {
       const { username, password } = userBody;
 
@@ -70,9 +81,11 @@ export class UserService {
     }
   }
 
-   deleteUser = async (id: string): Promise<IUser | null> => {
+   deleteUser = async (userId: ObjectId): Promise<(IUser & Required<{ _id: Schema.Types.ObjectId }>) | null> => {
     try {
-      return await UserModel.findByIdAndDelete(id).exec();
+        const result = await UserModel.findByIdAndDelete(userId).exec();
+        await this.taskCategoryService.deleteAllTaskCategoriesAndTasksByUser(userId);
+        return result;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Error deleting user: ${error.message}`);

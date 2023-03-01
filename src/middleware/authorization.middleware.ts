@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import {UserRole} from "@/user";
 
 
+
 // middleware for doing role-based permissions
-export default function permit(...permittedRoles: UserRole[]) {
+// export default function permit(...permittedRoles: typeof UserRole[]) {
+export  function permit(...permittedRoles: UserRole[]) {
     // return a middleware
     return (req: Request, res: Response, next: NextFunction) => {
         const { user } = req;
@@ -20,6 +22,7 @@ export default function permit(...permittedRoles: UserRole[]) {
            return next();
         }
 
+        // if (user && permittedRoles?.includes(role as unknown as typeof UserRole)) {
         if (user && permittedRoles?.includes(role as UserRole)) {
            return next(); // role is allowed, so continue on the next middleware
         } else {

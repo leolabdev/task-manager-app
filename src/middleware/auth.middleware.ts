@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
+import {ObjectId} from "mongoose";
+
 
 interface TokenPayload {
-    userId: string;
+    userId: ObjectId;
     role: string;
 }
 

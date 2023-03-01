@@ -1,11 +1,13 @@
-import {Document } from "mongoose";
+import {Document, ObjectId, Schema} from "mongoose";
 
 
 interface IUser extends Document {
-    // _id?: ObjectId;
+    _id?: ObjectId;
     username: string;
     password: string;
     role: string;
+    tasks: Schema.Types.ObjectId[];
+    taskCategories: Schema.Types.ObjectId[];
     // email?: string;
     // __v?: number;
 }

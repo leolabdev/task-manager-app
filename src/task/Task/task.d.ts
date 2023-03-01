@@ -1,25 +1,35 @@
-import {Document } from "mongoose";
+import {Document, ObjectId, Schema} from "mongoose";
 
 
 interface ITask extends Document {
-    // _id?: ObjectId;
-    username: string;
-    password: string;
-    role: string;
+    _id?: ObjectId;
+    title: string;
+    description?: string;
+    taskCategory: Schema.Types.ObjectId;
+    user: Schema.Types.ObjectId;
+    priority: string;
+    deadlineTime: Date;
     // user: IUser;
     // email?: string;
     // __v?: number;
 }
 
 interface ICreateTask {
-    username: string;
-    password: string;
+    title: string;
+    description?: string;
+    taskCategory: Schema.Types.ObjectId;
+    user: Schema.Types.ObjectId;
+    priority: string;
+    deadlineTime: Date;
 }
 
 interface IUpdateTask {
-    id: string;
-    username: string;
-    password: string;
+    _id: string;
+    title?: string;
+    description?: string;
+    taskCategory?: Schema.Types.ObjectId;
+    priority?: string;
+    deadlineTime?: Date;
 }
 
 

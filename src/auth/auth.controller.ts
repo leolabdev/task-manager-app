@@ -31,7 +31,7 @@ class AuthController {
 
         // Save user to database
         try {
-            await this.userService.postNew(newUser);
+            await this.userService.createNew(newUser);
             res.status(201).json({ message: 'User created successfully' });
         } catch (err) {
             logger.error(err);

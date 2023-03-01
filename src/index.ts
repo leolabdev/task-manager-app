@@ -8,11 +8,13 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose'
 
 // Import routers
-import { userRouter, userPath } from './user'
-import { authRouter } from "./auth"
+import { userRouter, userPath} from '@/user'
+import { authRouter } from "@/auth"
+
 
 // Import middleware
-import * as middleware from './middleware'
+import * as middleware from '@/middleware'
+import {taskPath, taskRouter} from "@/task";
 
 // Load environment variables
 dotenv.config();
@@ -42,6 +44,7 @@ app.get('/', (req: Request, res: Response) => {
     res.status(200).send('Hello world');
 });
 app.use(userPath, userRouter);
+app.use(taskPath, taskRouter);
 app.use('', authRouter);
 
 // Error handling middleware

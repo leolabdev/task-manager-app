@@ -1,18 +1,21 @@
-import express from 'express'
+import {Router} from 'express'
 import {UserController} from './user.controller'
 import {authMiddleware} from "@/middleware";
-// import permit from "@/middleware/authorization.middleware";
-// import {UserRole} from "./Task/userRole";
+import {permit} from "@/middleware";
+import {UserRole} from "./User/userRole";
+import {taskPath} from "@/task";
 
 
-const router = express.Router()
+
+const router = Router()
 const userPath = '/users';
 
 const userController = new UserController();
 
+
 /* GET users */
-router.get('/', authMiddleware, userController.getAllUsers)
-// router.get('/', authMiddleware, permit(), userController.getAllUsers)
+// router.get('/', authMiddleware, userController.getAllUsers)
+router.get('/', authMiddleware, permit(UserRole.basic), userController.getAllUsers)
 //
 
 // /* GET user by id */S
