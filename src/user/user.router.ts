@@ -1,9 +1,7 @@
 import {Router} from 'express'
 import {UserController} from './user.controller'
-import {authMiddleware} from "@/middleware";
-import {permit} from "@/middleware";
+import {authMiddleware, permit} from "@/middleware";
 import {UserRole} from "./User/userRole";
-
 
 
 const router = Router()
@@ -17,14 +15,14 @@ router.get('/', authMiddleware, permit(UserRole.basic), userController.getAll);
 //
 
 // /* GET current user */
-router.get('/current', authMiddleware, userController.getCurrentUser);
+router.get('/current', authMiddleware,permit(UserRole.basic), userController.getCurrentUser);
 
 // /* GET user by id */S
 // router.get('/:id',authMiddleware, permit(), userController.getById)
-router.get('/:id',authMiddleware, userController.getById);
+router.get('/:id',authMiddleware,permit(UserRole.admin,UserRole.moderator), userController.getById);
 
 // /* GET user by username */
-router.get('/by-username/:username',authMiddleware, userController.getByUsername);
+router.get('/by-username/:username',authMiddleware,permit(UserRole.admin,UserRole.moderator), userController.getByUsername);
 
 /* POST new user */
 // router.post('/', authMiddleware, permit(UserRole.admin), userController.postNew);

@@ -1,6 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {UserRole} from "@/user";
-
 
 
 // middleware for doing role-based permissions
@@ -20,7 +19,11 @@ export  function permit(...permittedRoles: UserRole[]) {
            return next();
         }
 
-        // if (user && permittedRoles?.includes(role as unknown as typeof UserRole)) {
+        //  if user is moderator, add basic role to permitted roles
+        if(permittedRoles.includes(UserRole.basic)){
+            permittedRoles.push(UserRole.moderator);
+        }
+
         if (user && permittedRoles?.includes(role as UserRole)) {
            return next(); // role is allowed, so continue on the next middleware
         } else {
