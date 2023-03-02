@@ -260,6 +260,8 @@ export class UserController {
                 throw new HttpException(403, 'Not authorized to delete this user');
             }
 
+            res.clearCookie(CookieEnum.token);
+
             await this.userService.deleteUser(id);
 
             res.status(204).send();
