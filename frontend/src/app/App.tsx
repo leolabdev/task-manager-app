@@ -1,19 +1,16 @@
-import {useState} from 'react'
-import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
+import { classNames } from "@/shared/lib/classNames/classNames";
+import { AppRouter } from "./providers/router";
+import {Suspense, useEffect} from "react";
 
+const App = () => {
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div className="App">
-        test
-        <Button theme={ButtonTheme.OUTLINE}/>
-    </div>
-  )
-}
-
-
-
-
-export default App
+    return(
+        <div className={classNames("app", {}, [])}>
+            <Suspense fallback="">
+                <div className="content-page">
+                    <AppRouter />
+                </div>
+            </Suspense>
+        </div>
+    )};
+export default App;
