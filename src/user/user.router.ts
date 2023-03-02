@@ -38,7 +38,7 @@ router.put('/:id', authMiddleware, permit(UserRole.admin), userController.update
 router.delete('/', authMiddleware, userController.deleteCurrentUser);
 
 // /* Delete any user by id*/
-router.delete('/:id', permit(UserRole.admin), authMiddleware, userController.deleteById);
+router.delete('/:id', authMiddleware, permit(UserRole.admin) , userController.deleteById);
 
 export { router , userPath }
 
