@@ -9,8 +9,9 @@ import {ObjectId} from "mongoose";
 export class TaskService {
 
 
-    getByUserName = async (username: string): Promise<ITask | null> =>  {
+    getAllByUserName = async (username: string): Promise<ITask | null> =>  {
         try {
+            // todo find all tasks related to user
             return await TaskModel.findOne({username}).exec();
         } catch (error: unknown) {
             if (error instanceof Error) {
