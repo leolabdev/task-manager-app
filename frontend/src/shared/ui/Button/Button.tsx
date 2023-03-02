@@ -1,8 +1,6 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
-// import { classNames } from "../../lib/classNames/classNames";
 import {ButtonHTMLAttributes, FC} from "react";
 import cls from "./Button.module.scss";
-
 
 
 export enum ButtonTheme {
@@ -44,8 +42,6 @@ export const Button: FC<ButtonProps> = (props) => {
         [cls.square]: square,
         [cls.disabled]: disabled,
     } as Record<string, boolean>;
-
-    // console.log(theme)
 
     return (
         <button
