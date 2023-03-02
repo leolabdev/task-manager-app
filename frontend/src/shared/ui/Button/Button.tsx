@@ -3,6 +3,12 @@ import {ButtonHTMLAttributes, FC} from "react";
 import cls from "./Button.module.scss";
 
 
+/**
+ * Module containing a React Button component with customizable themes, sizes, and square styling.
+ * @module Button
+ */
+
+
 export enum ButtonTheme {
     PRIMARY = "",
     CLEAR = "clear",
@@ -19,6 +25,16 @@ export enum ButtonSize {
     XL = "sizeXL",
 }
 
+
+/**
+ * Props for the Button component.
+ * @typedef {Object} ButtonProps
+ * @property {string} [className=""] - Additional class name(s) for the button.
+ * @property {ButtonTheme} [theme=ButtonTheme.PRIMARY] - Theme for the button.
+ * @property {boolean} [square=false] - Whether or not the button should be styled with square corners.
+ * @property {ButtonSize} [size=ButtonSize.M] - Size for the button.
+ * @property {boolean} [disabled=false] - Whether or not the button should be disabled.
+ */
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
     theme?: ButtonTheme;
@@ -32,7 +48,7 @@ export const Button: FC<ButtonProps> = (props) => {
         className = "",
         children,
         theme = ButtonTheme.PRIMARY,
-        square= false,
+        square = false,
         disabled = false,
         size = ButtonSize.M,
         ...otherProps
