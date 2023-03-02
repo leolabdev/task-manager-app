@@ -41,6 +41,33 @@ export class UserController {
         }
     };
 
+    getCurrentUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const userId = req?.user?.userId;
+
+            if (!userId) throw new Error('User id not found in request (getCurrentUser)');
+
+            const user = await this.userService.getById(userId);
+
+            if (!user) throw new HttpException(404, 'User not found');
+
+            const userWithoutPassword: IUserWithoutPassword = {
+                id: user.id,
+                username: user.username,
+                tasks: user.tasks,
+                taskCategories: user.taskCategories,
+                role: user.role as UserRole,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt,
+            };
+
+            res.status(200).json(userWithoutPassword);
+        } catch (e: unknown) {
+            logger.error(e);
+            next(e);
+        }
+    };
+
 
     // postNew = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     //     try {

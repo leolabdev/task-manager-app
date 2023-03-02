@@ -16,12 +16,15 @@ const userController = new UserController();
 router.get('/', authMiddleware, permit(UserRole.basic), userController.getAll);
 //
 
+// /* GET current user */
+router.get('/current', authMiddleware, userController.getCurrentUser);
+
 // /* GET user by id */S
 // router.get('/:id',authMiddleware, permit(), userController.getById)
 router.get('/:id',authMiddleware, userController.getById);
 
 // /* GET user by username */
-router.get('/by-username/:username', userController.getByUsername);
+router.get('/by-username/:username',authMiddleware, userController.getByUsername);
 
 /* POST new user */
 // router.post('/', authMiddleware, permit(UserRole.admin), userController.postNew);
