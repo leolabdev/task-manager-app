@@ -33,7 +33,7 @@ export class TaskCategoryService{
         }
     }
 
-    getAllRelatedToUser = async (userId: ObjectId): Promise<ITaskCategory[]> =>{
+    getAllRelatedToUser = async (userId: string): Promise<ITaskCategory[]> =>{
         try {
             return await TaskCategoryModel.find({ user: userId }).populate('tasks');
         } catch (error: unknown) {
@@ -44,7 +44,7 @@ export class TaskCategoryService{
         }
     }
 
-    getById = async (id: ObjectId): Promise<ITaskCategory | null> =>  {
+    getById = async (id: string): Promise<ITaskCategory | null> =>  {
 
             try {
                 return await TaskCategoryModel.findById(id).populate('tasks');
@@ -58,11 +58,11 @@ export class TaskCategoryService{
 
     createNew = async (taskCategoryBody: ICreateTaskCategory): Promise<ITaskCategory> =>{
         try {
-            const { taskCategoryName, userId } = taskCategoryBody;
+            const { taskCategoryName, user } = taskCategoryBody;
 
             const newTaskCategory = new TaskCategoryModel<ICreateTaskCategory>({
                 taskCategoryName,
-                userId,
+                user,
                 //todo check it
                 // tasks: []
             });
@@ -105,7 +105,7 @@ export class TaskCategoryService{
     }
 
 
-    deleteAllTaskCategoriesAndTasksByUser = async (userId: ObjectId): Promise<DeleteResult> => {
+    deleteAllTaskCategoriesAndTasksByUser = async (userId: string): Promise<DeleteResult> => {
         try {
             // Find all task categories belonging to the user
             // const taskCategories = await TaskCategoryModel.find({ user: userId }).exec();
@@ -113,7 +113,7 @@ export class TaskCategoryService{
 
             // Loop through each task category and delete its tasks
             for (const taskCategory of taskCategories) {
-                await this.taskService.deleteAllTasksByTaskCategory(taskCategory._id);
+                await this.taskService.deleteAllTasksByTaskCategory(taskCategory._id as unknown as string);
             }
 
             // Delete all task categories belonging to the user

@@ -240,6 +240,59 @@ export class UserController {
         }
     };
 
+    deleteById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const id = req.params.id;
+
+            const { error } = validateMongoId(id);
+
+            if (error) {
+                throw new HttpException(400, `Invalid input: ${error.message}`);
+            }
+
+            const user = await this.userService.getById(id);
+
+            if (!user) {
+                throw new HttpException(404, 'User not found');
+            }
+
+            if (req.user && req.user.userId !== user.id && req.user.role !== UserRole.admin) {
+                throw new HttpException(403, 'Not authorized to delete this user');
+            }
+
+            await this.userService.deleteUser(id);
+
+            res.status(204).send();
+        } catch (e: unknown) {
+            logger.error(e);
+            next(e);
+        }
+    };
+
+
+    deleteCurrentUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const userId = req?.user?.userId;
+
+            if(!userId) throw new Error('User id not found in request (deleteCurrentUser)');
+
+            const userToDelete = await this.userService.getById(userId);
+
+            if (!userToDelete) throw new HttpException(404, 'User not found');
+
+            const deletedUser = await this.userService.deleteUser(userId);
+
+            if (!deletedUser) throw new HttpException(404, 'User not found');
+
+            res.clearCookie(CookieEnum.token);
+
+            res.status(200).json(deletedUser);
+        } catch (e: unknown) {
+            logger.error(e);
+            next(e);
+        }
+    };
+
 
 }
 

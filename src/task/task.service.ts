@@ -86,7 +86,7 @@ export class TaskService {
   }
 
     deleteAllTasksByTaskCategory = async (
-        taskCategoryId: ObjectId,
+        taskCategoryId: string,
     ): Promise<DeleteResult> => {
         try {
             return await TaskModel.deleteMany({ taskCategory: taskCategoryId }).exec();
@@ -98,7 +98,7 @@ export class TaskService {
         }
     };
 
-    deleteAllTasksByUser = async (userId: ObjectId): Promise<DeleteResult> => {
+    deleteAllTasksByUser = async (userId: string): Promise<DeleteResult> => {
         try {
             return await TaskModel.deleteMany({ user: userId }).exec();
         } catch (error: unknown) {

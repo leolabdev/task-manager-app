@@ -81,7 +81,7 @@ export class UserService {
     }
   }
 
-   deleteUser = async (userId: ObjectId): Promise<(IUser & Required<{ _id: Schema.Types.ObjectId }>) | null> => {
+   deleteUser = async (userId: string): Promise<(IUser & Required<{ _id: Schema.Types.ObjectId }>) | null> => {
     try {
         const result = await UserModel.findByIdAndDelete(userId).exec();
         await this.taskCategoryService.deleteAllTaskCategoriesAndTasksByUser(userId);
