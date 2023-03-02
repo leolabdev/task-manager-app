@@ -1,4 +1,5 @@
 import {Document, ObjectId, Schema} from "mongoose";
+import {UserRole} from "@/user";
 
 
 interface IUser extends Document {
@@ -8,8 +9,18 @@ interface IUser extends Document {
     role: string;
     tasks: Schema.Types.ObjectId[];
     taskCategories: Schema.Types.ObjectId[];
-    // email?: string;
-    // __v?: number;
+    createdAt : Date;
+    updatedAt : Date;
+}
+
+interface IUserWithoutPassword {
+    id: string;
+    username: string;
+    role: UserRole;
+    tasks: Schema.Types.ObjectId[];
+    taskCategories: Schema.Types.ObjectId[];
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 interface ICreateUser {
@@ -17,12 +28,11 @@ interface ICreateUser {
     password: string;
 }
 
-interface IUpdateUser {
-    id: string;
+interface IUpdateUser{
+    id?: string;
     username: string;
     password: string;
+    role: UserRole;
 }
 
-
-
-export { IUser,ICreateUser,IUpdateUser }
+export { IUser,ICreateUser,IUpdateUser,IUserWithoutPassword }

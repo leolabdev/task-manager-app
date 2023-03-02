@@ -12,8 +12,6 @@ export  function permit(...permittedRoles: UserRole[]) {
 
         const role = req.user?.role;
 
-        console.log(role)
-
         if (!role) {
             return res.status(401).json({ message: 'Not authorized' });
         }

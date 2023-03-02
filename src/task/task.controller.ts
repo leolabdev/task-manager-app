@@ -23,8 +23,8 @@ export class TaskController {
                 throw new HttpException(400, `Invalid input: ${error.message}`);
             }
             const { page = 1, limit = 10 } = value;
-            const users = await this.taskService.getAll(Number(page), Number(limit));
-            res.status(200).json(users);
+            const tasks = await this.taskService.getAll(Number(page), Number(limit));
+            res.status(200).json(tasks);
 
         } catch (e: unknown) {
             logger.error(e);

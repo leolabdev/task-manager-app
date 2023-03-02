@@ -69,10 +69,10 @@ export class UserService {
     }
   }
 
-   updateUser = async (id: string, userBody: IUpdateUser): Promise<IUser | null> =>{
+   updateUser = async (userBody: IUpdateUser): Promise<IUser | null> =>{
     try {
-      const { username, password } = userBody;
-      return await UserModel.findByIdAndUpdate(id, { username, password }, { new: true }).exec();
+      const { id, username, password, role } = userBody;
+      return await UserModel.findByIdAndUpdate(id, { username, password ,role }, { new: true }).exec();
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Error updating user: ${error.message}`);

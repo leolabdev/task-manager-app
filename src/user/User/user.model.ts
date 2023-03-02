@@ -16,7 +16,8 @@ const userSchema = new Schema<IUser>({
     },
     role: {
         type: String,
-        enum: [ UserRole.basic,UserRole.moderator, UserRole.admin], default: UserRole.basic
+        // enum: [ UserRole.basic,UserRole.moderator, UserRole.admin], default: UserRole.basic
+        enum: [ ...Object.values(UserRole)], default: UserRole.basic
     },
     tasks: [{
         type: Schema.Types.ObjectId,
@@ -26,9 +27,8 @@ const userSchema = new Schema<IUser>({
     taskCategories: [{
         type: Schema.Types.ObjectId,
         ref: SchemaRelationsEnum.TASK_CATEGORY
-    }]
-
-})
+    }],
+}, {timestamps: true});
 
 
 
