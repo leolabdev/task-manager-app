@@ -8,15 +8,16 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+    "@storybook/addon-interactions",
+     "storybook-addon-themes"
   ],
   "framework": "@storybook/react",
   "core": {
     "builder": "@storybook/builder-vite"
   },
-  "features": {
-    "storyStoreV7": true
-  },
+  // "features": {
+  //   "storyStoreV7": true
+  // },
 
   async viteFinal(config, { configType }) {
     return {
