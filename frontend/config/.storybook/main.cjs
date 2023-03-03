@@ -1,4 +1,5 @@
 const path = require('path');
+const svgr = require("vite-plugin-svgr");
 
 module.exports = {
   "stories": [
@@ -15,11 +16,18 @@ module.exports = {
   "core": {
     "builder": "@storybook/builder-vite"
   },
-  // "features": {
-  //   "storyStoreV7": true
-  // },
+  "staticDirs": [ "../../public" ],
 
   async viteFinal(config, { configType }) {
+
+    config.plugins = [
+      ...config.plugins,
+      svgr({
+        exportAsDefault: true,
+        include: '**/*.svg',
+      }),
+    ];
+
     return {
       ...config,
       resolve: {
@@ -30,6 +38,14 @@ module.exports = {
           },
         ],
       },
+
+
+
+
+
     };
   },
+
+
+
 }

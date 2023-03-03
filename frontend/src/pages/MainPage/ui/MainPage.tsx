@@ -1,9 +1,10 @@
-const MainPage = () => {
+import {ThemeSwitcher} from "@/features/ThemeSwitcher";
 
+const MainPage = () => {
     return (
         <>
           <div>
-              hello
+              <ThemeSwitcher/>
           </div>
 
         </>
