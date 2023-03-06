@@ -1,4 +1,4 @@
-import  {model,Model, Schema} from "mongoose";
+import {CallbackError, CallbackWithoutResultAndOptionalError, model, Model, Schema, Types} from "mongoose";
 import {ITaskCategory} from "./taskCategory";
 import {SchemaRelationsEnum} from "@/types/schema-enums";
 
@@ -21,36 +21,42 @@ const taskCategorySchema = new Schema<ITaskCategory>({
     }]
 })
 
+// Add pre middleware to the TaskCategory schema to update the user's taskCategories field
+taskCategorySchema.pre('save', async function(next) {
+    try {
+        // Find the user by taskCategory's creator ID
+        const user = await model(SchemaRelationsEnum.USER).findById(this.user);
 
+        // Add the new taskCategory ID to the user's taskCategories array
+        user.taskCategories.push(this._id);
+
+        // Save the updated user
+        await user.save();
+
+        next();
+    } catch (error: any) {
+        next(error);
+    }
+});
+
+
+taskCategorySchema.pre<ITaskCategory>("remove", async function (next) {
+
+    try {
+        // Remove the taskCategory ID from the user's taskCategories array
+        await model(SchemaRelationsEnum.USER).findById(this.user)
+            .updateOne({$pull: {taskCategories: this._id}});
+        // Delete all the tasks associated with the deleted taskCategory document
+        await model(SchemaRelationsEnum.TASK).deleteMany({ taskCategory: this._id });
+        next();
+    }
+    catch (error:  any) {
+        next(error);
+    }
+});
 
 
 
 export const TaskCategoryModel: Model<ITaskCategory> = model<ITaskCategory>(SchemaRelationsEnum.TASK_CATEGORY, taskCategorySchema);
 
-import {ITask} from "@/task";
-// // Add the pre-delete middleware function to the category schema todo fix this any
-// taskCategorySchema.pre('deleteOne', async function (next) {
-//     const taskCategory = this;
-//
-//     // Find all tasks that reference the category being deleted
-//     // const tasks = await model(SchemaRelationsEnum.TASK).find({ category: category._id });
-//     const tasks: ITask[] = await model(SchemaRelationsEnum.TASK).find({ taskCategory: taskCategory._id });
-//
-//     // Delete all tasks that reference the category being deleted
-//     await Promise.all(tasks.map(task => task.delete()));
-//
-//     next();
-// });
 
-// //TODO check it , if it works
-// taskCategorySchema.pre('deleteOne', { document: true, query: false }, async function (next) {
-//     const taskCategory = this;
-//
-//     try {
-//         // Delete all tasks that reference the category being deleted
-//         await model<ITask>(SchemaRelationsEnum.TASK).deleteMany({ taskCategory: taskCategory._id });
-//         next();
-//     } catch (error) {
-//         next(error as Error);
-//     }
-// });

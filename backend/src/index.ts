@@ -9,8 +9,8 @@ import mongoose from 'mongoose'
 
 // Import routers
 import { userRouter, userPath} from '@/user'
+import { taskCategoryRouter, taskCategoryPath} from '@/taskCategory'
 import { authRouter } from "@/auth"
-
 
 // Import middleware
 import * as middleware from '@/middleware'
@@ -40,11 +40,12 @@ app.use(cors());
 app.use(express.json());
 
 // Define routes
-app.get('/', (req: Request, res: Response) => {
+app.get('/lolo', (req: Request, res: Response) => {
     res.status(200).send('Hello world');
 });
 app.use(userPath, userRouter);
 app.use(taskPath, taskRouter);
+app.use(taskCategoryPath, taskCategoryRouter);
 app.use('', authRouter);
 
 // Error handling middleware

@@ -3,7 +3,6 @@ import {Document, ObjectId, Schema} from "mongoose";
 
 interface ITask extends Document {
     _id?: ObjectId;
-    // _id?: ObjectId;
     title: string;
     description?: string;
     taskCategory: Schema.Types.ObjectId;

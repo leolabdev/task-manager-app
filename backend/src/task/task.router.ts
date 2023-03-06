@@ -1,37 +1,46 @@
 import express from 'express'
 import {TaskController} from './task.controller'
-import {authMiddleware} from "@/middleware";
-import {permit} from "@/middleware";
+import {authMiddleware, permit} from "@/middleware";
 
 
 // todo for some reason doesnt work public api import {UserRole} from "@user";
 import {UserRole} from "@/user/User/userRole";
-
-
-
-
+import {TaskCategoryService} from "@/taskCategory";
+import {TaskService} from "@/task/task.service";
 
 
 const router = express.Router()
 const taskPath = '/tasks'
 
-const taskController = new TaskController();
+// todo here we can see why we need to use DI
+const taskController = new TaskController(new TaskCategoryService(new TaskService()));
 
 
-/* GET tasks */
-// router.get('/', authMiddleware, taskController.getAllTasks)
-router.get('/', authMiddleware, permit(UserRole.basic), taskController.getAllTasks)
+/* GET all tasks related to user*/
+router.get('/', authMiddleware, taskController.getAllTasksByCurrentUser);
+
+/* GET all tasks*/
+router.get('/admin', authMiddleware, permit(UserRole.admin, UserRole.moderator), taskController.getAllTasks);
+
+//
+// /* GET task by id and current user */
+router.get('/:id', authMiddleware, taskController.getByIdAndCurrentUser);
 
 //
 // /* GET task by id */
-router.get('/:id', taskController.getById)
+router.get('/admin/:id', authMiddleware,  permit(UserRole.admin,UserRole.moderator), taskController.getById);
 
-//
-// // /* GET task by name */
-// router.get('/:username', taskController.getByUsername)
 
 // /* POST new task */
-// router.post('/', taskController.createNew)
+router.post('/',authMiddleware, taskController.createNewByCurrentUser);
+
+// /* Put task by Current user */
+router.put('/:id',authMiddleware, taskController.updateByCurrentUser);
+
+
+// /* delete task by id and current user */
+router.delete('/:id', authMiddleware, taskController.deleteByCurrentUser);
+
 
 export { router , taskPath }
 

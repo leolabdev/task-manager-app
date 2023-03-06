@@ -8,7 +8,8 @@ export function createTaskValidation(task: ICreateTask) {
         title: Joi.string().required(),
         description: Joi.string().min(3).max(500).allow("").optional(),
         taskCategory: Joi.string().required(),
-        priority: Joi.string().valid(TaskPriorityEnum.low, TaskPriorityEnum.medium, TaskPriorityEnum.high).required(),
+        user: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+        priority: Joi.string().valid(...Object.values(TaskPriorityEnum)).required(),
         deadlineTime: Joi.date().required(),
     });
     return schema.validate(task);
@@ -17,12 +18,11 @@ export function createTaskValidation(task: ICreateTask) {
 export function updateTaskValidation(task: IUpdateTask) {
     const schema = Joi.object<IUpdateTask>({
         _id: Joi.string().required(),
-        title: Joi.string(),
+        title: Joi.string().optional(),
         description: Joi.string().min(3).max(500).allow("").optional(),
-        taskCategory: Joi.string(),
-        priority: Joi.string().valid(TaskPriorityEnum.low, TaskPriorityEnum.medium, TaskPriorityEnum.high).required(),
-        deadlineTime: Joi.date(),
-
+        taskCategory: Joi.string().optional(),
+        priority: Joi.string().valid(...Object.values(TaskPriorityEnum)).optional(),
+        deadlineTime: Joi.date().optional(),
     });
     return schema.validate(task);
 }

@@ -30,6 +30,16 @@ const userSchema = new Schema<IUser>({
     }],
 }, {timestamps: true});
 
+// userSchema.virtual('associatedTaskCategories', {
+//     // ref: 'TaskCategory',
+//     // localField: '_id',
+//     // foreignField: 'user'
+//
+//     ref: SchemaRelationsEnum.TASK_CATEGORY,
+//     localField: '_id',
+//     foreignField: SchemaRelationsEnum.USER
+// });
+
 
 
 export const UserModel: Model<IUser> = model<IUser>(SchemaRelationsEnum.USER, userSchema);

@@ -1,6 +1,10 @@
-import {ICreateTaskCategory, ITaskCategory, IUpdateTaskCategory} from "./TaskCategory/taskCategory";
+import {
+    ICreateTaskCategory,
+    ICreateTaskCategoryWithUserId,
+    ITaskCategory,
+    IUpdateTaskCategory
+} from "./TaskCategory/taskCategory";
 import {TaskCategoryModel} from "./TaskCategory/taskCategory.model";
-import {ObjectId, Types} from "mongoose";
 import {DeleteResult} from "mongodb";
 import {TaskService} from "@/task";
 
@@ -9,12 +13,13 @@ export class TaskCategoryService{
 
     private taskService: TaskService;
 
-    constructor() {
-        this.taskService = new TaskService();
+    constructor(taskService: TaskService) {
+        this.taskService = taskService;
     }
 
     getAll = async (page = 1, limit = 10): Promise<ITaskCategory[]> =>{
         try {
+
             const skipCount = (page - 1) * limit;
             return await TaskCategoryModel.find()
                 .populate({
@@ -35,7 +40,12 @@ export class TaskCategoryService{
 
     getAllRelatedToUser = async (userId: string): Promise<ITaskCategory[]> =>{
         try {
-            return await TaskCategoryModel.find({ user: userId }).populate('tasks');
+            return await TaskCategoryModel.find({ user: userId })
+                .populate('tasks')
+                .populate({
+                path: "user",
+                select: "-password -taskCategories -tasks",
+            })
         } catch (error: unknown) {
             if (error instanceof Error) {
                 throw new Error(`Error getting all users: ${error.message}`);
@@ -56,15 +66,13 @@ export class TaskCategoryService{
             }
     }
 
-    createNew = async (taskCategoryBody: ICreateTaskCategory): Promise<ITaskCategory> =>{
+    createNew = async (taskCategoryBody: ICreateTaskCategoryWithUserId): Promise<ITaskCategory> =>{
         try {
             const { taskCategoryName, user } = taskCategoryBody;
 
-            const newTaskCategory = new TaskCategoryModel<ICreateTaskCategory>({
+            const newTaskCategory = new TaskCategoryModel<ICreateTaskCategoryWithUserId>({
                 taskCategoryName,
                 user,
-                //todo check it
-                // tasks: []
             });
             return await newTaskCategory.save();
         } catch (error: unknown) {
@@ -93,9 +101,20 @@ export class TaskCategoryService{
         }
     }
 
-    deleteTaskCategoryById = async (id: ObjectId): Promise<ITaskCategory | null> => {
+    deleteTaskCategoryById = async (id: string): Promise<ITaskCategory | null> => {
         try {
-            return await TaskCategoryModel.findByIdAndDelete(id).populate('tasks');
+            // return await TaskCategoryModel.findByIdAndDelete(id);
+
+            const taskCategory = await TaskCategoryModel.findById(id);
+
+            if (!taskCategory) {
+                return null;
+            }
+            // Remove the task category document and trigger the pre middleware hook to update the user document's taskCategories array
+            await taskCategory.remove();
+
+            return taskCategory;
+
         } catch (error: unknown) {
             if (error instanceof Error) {
                 throw new Error(`Error getting user by ID: ${error.message}`);
@@ -103,7 +122,6 @@ export class TaskCategoryService{
             throw new Error(`Error getting user by ID: ${error}`);
         }
     }
-
 
     deleteAllTaskCategoriesAndTasksByUser = async (userId: string): Promise<DeleteResult> => {
         try {

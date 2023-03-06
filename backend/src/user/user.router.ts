@@ -11,34 +11,31 @@ const userController = new UserController();
 
 /* GET users */
 // router.get('/', authMiddleware, userController.getAllUsers)
-router.get('/', authMiddleware, permit(UserRole.basic), userController.getAll);
+router.get('/admin', authMiddleware, permit(UserRole.admin), userController.getAllUsers);
 //
 
 // /* GET current user */
 router.get('/current', authMiddleware,permit(UserRole.basic), userController.getCurrentUser);
 
 // /* GET user by id */S
-// router.get('/:id',authMiddleware, permit(), userController.getById)
-router.get('/:id',authMiddleware,permit(UserRole.admin,UserRole.moderator), userController.getById);
+router.get('/admin/:id',authMiddleware,permit(UserRole.admin,UserRole.moderator), userController.getById);
 
 // /* GET user by username */
-router.get('/by-username/:username',authMiddleware,permit(UserRole.admin,UserRole.moderator), userController.getByUsername);
+router.get('/admin/:username',authMiddleware,permit(UserRole.admin,UserRole.moderator), userController.getByUsername);
 
-/* POST new user */
-// router.post('/', authMiddleware, permit(UserRole.admin), userController.postNew);
 
 /* Update current user */
 router.put('/', authMiddleware, userController.updateCurrentUser);
 
 /* Update user by id */
-router.put('/:id', authMiddleware, permit(UserRole.admin), userController.updateUserById);
+router.put('/admin/:id', authMiddleware, permit(UserRole.admin), userController.updateUserById);
 // router.put('/:id', authMiddleware, userController.updateUserById);
 
 /* Delete current user*/
 router.delete('/', authMiddleware, userController.deleteCurrentUser);
 
 // /* Delete any user by id*/
-router.delete('/:id', authMiddleware, permit(UserRole.admin) , userController.deleteById);
+router.delete('/admin/:id', authMiddleware, permit(UserRole.admin) , userController.deleteById);
 
 export { router , userPath }
 

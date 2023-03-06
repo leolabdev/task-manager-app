@@ -13,33 +13,23 @@ import {hashPassword} from "@/common/hashPassword";
 import {generateAuthToken} from "@/common/generateAuthToken";
 import {CookieEnum} from "@/types/cookie-enums";
 import {UserRole} from "@/user/User/userRole";
+import {createGetAllHandler} from "@/common/factories/createGetAllHandlerFactory";
 
 
 
 export class UserController {
-    private userService: UserService;
+    private readonly userService: UserService;
 
     constructor() {
         this.userService = new UserService();
     }
 
-    getAll =  async (req: Request, res: Response, next: NextFunction): Promise<void> =>  {
 
-        try {
-            const { error, value } = validateGetAllPaginationQuery(req.query);
-
-            if (error) {
-                throw new HttpException(400, `Invalid input: ${error.message}`);
-            }
-            const { page = 1, limit = 10 } = value;
-            const users = await this.userService.getAll(Number(page), Number(limit));
-            res.status(200).json(users);
-
-        } catch (e: unknown) {
-            logger.error(e);
-            next(e);
-        }
-    };
+    // todo Factory?
+    getAllUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        const getAllHandler = createGetAllHandler(this.userService, (e: unknown) => logger.error(e));
+        await  getAllHandler(req, res, next);
+    }
 
     getCurrentUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {

@@ -1,7 +1,11 @@
 import {TaskCategoryService} from "./taskCategory.service"
-
+import {TaskCategoryController} from "./taskCategory.controller"
+import {taskCategoryPath,router as taskCategoryRouter} from "./taskCategory.router"
 
 export {
-    TaskCategoryService
+    TaskCategoryController,
+    TaskCategoryService,
+    taskCategoryRouter,
+    taskCategoryPath
 }
 

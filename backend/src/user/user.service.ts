@@ -11,14 +11,14 @@ export class UserService {
     private taskCategoryService: TaskCategoryService;
 
     constructor() {
-        this.taskCategoryService = new TaskCategoryService();
+        this.taskCategoryService = new TaskCategoryService(new TaskService());
     }
 
 
 
     getByUserName = async (username: string): Promise<IUser | null> =>  {
         try {
-            return await UserModel.findOne({username}).exec();
+            return await UserModel.findOne({username})
         } catch (error: unknown) {
             if (error instanceof Error) {
                 throw new Error(`Error getting user by username: ${error.message}`);
@@ -31,7 +31,7 @@ export class UserService {
    getById = async (id: string): Promise<IUser | null> =>  {
 
     try {
-      return await UserModel.findById(id).exec();
+      return await UserModel.findById(id).populate('tasks').populate('taskCategories');
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Error getting user by ID: ${error.message}`);

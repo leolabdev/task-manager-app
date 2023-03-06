@@ -8,10 +8,13 @@ interface ITaskCategory extends Document {
     tasks?: Schema.Types.ObjectId[];
 }
 
+
 interface ICreateTaskCategory {
     taskCategoryName: string;
+}
+
+interface ICreateTaskCategoryWithUserId extends ICreateTaskCategory{
     user: Schema.Types.ObjectId;
-    // tasks: Schema.Types.ObjectId[];
 }
 
 interface IUpdateTaskCategory {
@@ -21,6 +24,10 @@ interface IUpdateTaskCategory {
     // tasks: Schema.Types.ObjectId[];
 }
 
+interface IDeleteTaskCategory {
+    _id: string;
+}
 
 
-export { ITaskCategory,ICreateTaskCategory,IUpdateTaskCategory}
+
+export { ITaskCategory,ICreateTaskCategory,IUpdateTaskCategory,IDeleteTaskCategory,ICreateTaskCategoryWithUserId}
