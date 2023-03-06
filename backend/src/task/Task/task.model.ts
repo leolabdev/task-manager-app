@@ -66,32 +66,6 @@ taskSchema.pre<ITask>("remove", async function (next) {
 });
 
 
-// taskSchema.pre<ITask>("findOneAndUpdate", async function (next) {
-//     try {
-//
-//         // console.log("hello")
-//         // console.log(this)
-//         // if (this.isModified('taskCategory')) { // Only call the hook if the "taskCategory" field has been modified
-//             // Remove the task from the old task category's tasks array
-//             // await model(SchemaRelationsEnum.TASK_CATEGORY)
-//             //     .findByIdAndUpdate(this.taskCategory, { $pull: { tasks: this._id } }).exec()
-//             // ;
-//             await model(SchemaRelationsEnum.TASK_CATEGORY).findById(this.taskCategory)
-//             .updateOne({$pull: {tasks: this._id}})
-//             .exec();;
-//
-//             // Add the task to the new task category's tasks array
-//             await model(SchemaRelationsEnum.TASK_CATEGORY)
-//             .findByIdAndUpdate(this.taskCategory, {$push: {tasks: this._id}})
-//                 .exec();
-//         // }
-//
-//         next();
-//     } catch (error:  any) {
-//         next(error);
-//     }
-// });
-
 
 taskSchema.pre('findOneAndUpdate', async function (next) {
     try {
@@ -110,22 +84,11 @@ taskSchema.pre('findOneAndUpdate', async function (next) {
         // Only call the hook if the "taskCategory" field has been modified
         if (oldCategory !== updateCategory) {
             // Remove the task from the old task category's tasks array
-            // await model(SchemaRelationsEnum.TASK_CATEGORY).findByIdAndUpdate(oldCategory, { $pull: { tasks: conditions._id } }).exec();
-            //
-            // // Add the task to the new task category's tasks array
-            // await model(SchemaRelationsEnum.TASK_CATEGORY).findByIdAndUpdate(updateCategory, { $push: { tasks: conditions._id } }).exec();
-
             await model(SchemaRelationsEnum.TASK_CATEGORY).findById(oldCategory)
                 .updateOne({$pull: {tasks: conditions._id}});
-
+            // Add the task to the new task category's tasks array
             await model(SchemaRelationsEnum.TASK_CATEGORY).findById(updateCategory)
                 .updateOne({$push: {tasks: conditions._id}});
-
-            // Update the task category's tasks array
-            // await model(SchemaRelationsEnum.TASK_CATEGORY).findById(this.taskCategory)
-            //     .updateOne({$pull: {tasks: this._id}})
-            //     .exec();
-
         }
 
 
