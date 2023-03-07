@@ -1,0 +1,41 @@
+.Select {
+  color: var(--primary-color);
+  padding: 6px 15px;
+}
+
+.clear,
+.clearInverted {
+  padding: 0;
+}
+
+.clearInverted {
+  color: var(--inverted-primary-color);
+}
+
+.background {
+  background: var(--bg-color);
+  color: var(--primary-color);
+  border: none;
+}
+
+.backgroundInverted {
+  background: var(--inverted-bg-color);
+  color: var(--inverted-primary-color);
+  border: none;
+}
+
+.sizeM {
+  font: var(--font-m);
+}
+
+.sizeL {
+  font: var(--font-l);
+}
+
+.sizeXL {
+  font: var(--font-xl);
+}
+
+.disabled {
+  opacity: 0.5;
+}

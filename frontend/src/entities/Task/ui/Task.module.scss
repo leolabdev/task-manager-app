@@ -1,0 +1,16 @@
+.Task {
+  //width: 50%;
+  padding: 10px 20px;
+}
+
+.low{
+  background-color: var(--low-priority-task-bg);
+}
+
+.medium{
+  background-color: var(--medium-priority-task-bg);
+}
+
+.high{
+  background-color: var(--high-priority-task-bg);
+}
