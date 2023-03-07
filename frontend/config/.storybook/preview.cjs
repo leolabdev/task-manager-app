@@ -1,6 +1,6 @@
 import { addDecorator } from "@storybook/react";
 import { withThemes } from "storybook-addon-themes";
-import { RouterDecorator } from "./__mocks__/RouterDecorator";
+import { RouterDecorator } from "../../src/shared/config/storybook/RouterDecorator/RouterDecorator";
 import "../../src/app/styles/index.scss";
 
 export const parameters = {

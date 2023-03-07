@@ -43,7 +43,7 @@ export class TaskService {
       })
           .populate({
               path: "user",
-              select: "-password -__v -taskCategories -tasks",
+              select: "-password -__v -taskCategories -tasks -createdAt -updatedAt",
           })
           .exec();
     } catch (error: unknown) {

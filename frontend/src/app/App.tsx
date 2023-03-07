@@ -1,12 +1,23 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import { AppRouter } from "./providers/router";
 import {Suspense, useEffect} from "react";
+import {userActions} from "@/entities/User";
+import {useDispatch} from "react-redux";
+import {Navbar} from "@/widgets/Navbar";
 
 const App = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+            dispatch(userActions.initAuthData())
+        },
+        [dispatch]);
 
     return(
         <div className={classNames("app", {}, [])}>
             <Suspense fallback="">
+                <Navbar />
                 <div className="content-page">
                     <AppRouter />
                 </div>

@@ -22,6 +22,10 @@ router.get('/admin/', authMiddleware, permit(UserRole.admin),taskCategoryControl
 router.get('/admin/:id', authMiddleware,permit(UserRole.admin), taskCategoryController.getById);
 
 //
+// /* GET taskCategory by id and currentUser */
+router.get('/:id', authMiddleware, taskCategoryController.getByIdAndCurrentUser);
+
+//
 // /* GET all taskCategories by user(id) */
 router.get('/admin/:username',authMiddleware, permit(UserRole.admin), taskCategoryController.getAllTaskCategoriesByUserId);
 

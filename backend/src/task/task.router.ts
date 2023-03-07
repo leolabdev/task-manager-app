@@ -12,7 +12,7 @@ import {TaskService} from "@/task/task.service";
 const router = express.Router()
 const taskPath = '/tasks'
 
-// todo here we can see why we need to use DI
+//todo here we can see why we need to use DI
 const taskController = new TaskController(new TaskCategoryService(new TaskService()));
 
 

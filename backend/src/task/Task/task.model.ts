@@ -78,8 +78,6 @@ taskSchema.pre('findOneAndUpdate', async function (next) {
         // @ts-ignore
         const updateTask = this._update;
         const updateCategory = updateTask.taskCategory.toString();
-        console.log(oldCategory)
-        console.log(updateCategory)
 
         // Only call the hook if the "taskCategory" field has been modified
         if (oldCategory !== updateCategory) {
@@ -90,7 +88,6 @@ taskSchema.pre('findOneAndUpdate', async function (next) {
             await model(SchemaRelationsEnum.TASK_CATEGORY).findById(updateCategory)
                 .updateOne({$push: {tasks: conditions._id}});
         }
-
 
         next();
     } catch (error) {

@@ -5,4 +5,9 @@
   --secondary-color: #049604;
   --inverted-primary-color: #0452ff;
   --inverted-secondary-color: #0232c2;
+  --border-color: #FFFFFF;
+  // task priorities
+  --low-priority-task-bg: rgba(0, 128, 0, 0.45);
+  --medium-priority-task-bg: rgba(255, 255, 0, 0.45);
+  --high-priority-task-bg: rgba(255, 0, 0, 0.45);
 }

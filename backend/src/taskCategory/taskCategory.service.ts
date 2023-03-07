@@ -41,11 +41,11 @@ export class TaskCategoryService{
     getAllRelatedToUser = async (userId: string): Promise<ITaskCategory[]> =>{
         try {
             return await TaskCategoryModel.find({ user: userId })
-                .populate('tasks')
+                .populate({path : "tasks", select: "-taskCategory -user -createdAt -updatedAt -__v"})
                 .populate({
                 path: "user",
-                select: "-password -taskCategories -tasks",
-            })
+                select: "-password -taskCategories -tasks -createdAt -updatedAt -__v"
+            });
         } catch (error: unknown) {
             if (error instanceof Error) {
                 throw new Error(`Error getting all users: ${error.message}`);
@@ -57,7 +57,10 @@ export class TaskCategoryService{
     getById = async (id: string): Promise<ITaskCategory | null> =>  {
 
             try {
-                return await TaskCategoryModel.findById(id).populate('tasks');
+                return await TaskCategoryModel.findById(id)
+                    // .populate('tasks')
+                    .populate({path: "tasks" , select: "-taskCategory -user -createdAt -updatedAt -__v"})
+                    .populate({ path: "user", select: "-password -taskCategories -tasks -createdAt -updatedAt -__v" });
             } catch (error: unknown) {
                 if (error instanceof Error) {
                     throw new Error(`Error getting user by ID: ${error.message}`);

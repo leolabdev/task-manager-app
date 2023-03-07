@@ -14,7 +14,7 @@ interface IUser extends Document {
 }
 
 interface IUserWithoutPassword {
-    id: string;
+    _id: ObjectId;
     username: string;
     role: UserRole;
     tasks: Schema.Types.ObjectId[];

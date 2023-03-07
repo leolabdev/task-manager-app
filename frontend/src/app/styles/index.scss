@@ -3,9 +3,13 @@
 @import "themes/light";
 @import "themes/dark";
 
+
+
 body {
   font: var(--font-m);
   color: var(--primary-color);
+  //width: 100vw;
+  max-width: 100%;
 }
 
 .app {

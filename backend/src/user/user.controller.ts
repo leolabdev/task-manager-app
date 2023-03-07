@@ -7,7 +7,6 @@ import {
     updateUserValidation
 } from "./helpers/userValidation";
 import {UserService} from "./user.service";
-import {validateGetAllPaginationQuery} from "@/common/validation/validateGetAllPaginationQuery";
 import {validateMongoId} from "@/common/validation/validateMongoId";
 import {hashPassword} from "@/common/hashPassword";
 import {generateAuthToken} from "@/common/generateAuthToken";
@@ -42,7 +41,7 @@ export class UserController {
             if (!user) throw new HttpException(404, 'User not found');
 
             const userWithoutPassword: IUserWithoutPassword = {
-                id: user.id,
+                _id: user.id,
                 username: user.username,
                 tasks: user.tasks,
                 taskCategories: user.taskCategories,
@@ -125,7 +124,7 @@ export class UserController {
             }
 
             const userWithoutPassword: IUserWithoutPassword = {
-                id: user.id,
+                _id: user.id,
                 username: user.username,
                 tasks: user.tasks,
                 taskCategories: user.taskCategories,
