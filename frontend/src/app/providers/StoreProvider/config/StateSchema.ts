@@ -1,7 +1,8 @@
 import { UserSchema } from "@/entities/User";
-import {LoginSchema} from "@/features/AuthByUsername";
+import {LoginSchema, RegisterSchema} from "@/features/AuthByUsername";
 
 export interface StateSchema {
     user: UserSchema;
     loginForm?: LoginSchema;
+    registerForm?: RegisterSchema;
 }

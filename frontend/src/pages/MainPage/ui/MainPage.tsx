@@ -1,13 +1,13 @@
 import {ThemeSwitcher} from "@/features/ThemeSwitcher";
 import {Input, InputTheme} from "@/shared/ui/Input/Input";
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, memo, useState} from "react";
 import {ISelectOption, Select, SelectTheme} from "@/shared/ui/Select/Select";
 import {ITask, TaskCard, TaskPriority} from "@/entities/Task";
 import {ICategory} from "@/entities/Category";
 import {CategorySection} from "@/widgets/CategorySection";
 
-const MainPage = () => {
+const MainPage = memo(() => {
 
     const [value, setValue] = useState('');
 
@@ -38,9 +38,7 @@ const MainPage = () => {
     return (
         <>
           <div>
-
               <br/>
-
           </div>
             <Input theme={InputTheme.BACKGROUND_INVERTED} value={value} onChange={handleChange} placeholder='kek'/><br/><br/>
             <Button theme={ButtonTheme.BACKGROUND_INVERTED}> lol </Button><br/><br/>
@@ -49,10 +47,9 @@ const MainPage = () => {
             {value}
             {selectedOption}
             <CategorySection category={categories[0]}/>
-
         </>
     );
-};
+});
 
 export default MainPage;
 

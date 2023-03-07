@@ -17,3 +17,25 @@
     color: var(--red-dark);
   }
 }
+
+.secondary {
+  .title {
+    color: var(--secondary-color);
+  }
+
+  .text {
+    color: var(--secondary-color);
+  }
+}
+
+.primaryInverted {
+  .title {
+    color: var(--inverted-primary-color);
+  }
+
+  .text {
+    color: var(--inverted-primary-color);
+  }
+}
+
+

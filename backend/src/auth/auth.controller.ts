@@ -29,7 +29,7 @@ class AuthController {
         // Check if user with the username already exists
         const existingUser = await this.userService.getByUserName(username);
         if (existingUser) {
-            return res.status(400).json({ message: 'User with that username already exists' });
+            return res.status(409).json({ message: 'User with that username already exists' });
         }
 
         // Create a new user
@@ -78,7 +78,10 @@ class AuthController {
         // Set token as a cookie
         res.cookie(CookieEnum.token, token, { httpOnly: true , maxAge: Number(process.env.JWT_MAX_AGE)});
 
-        res.status(200).json({ token });
+        // user to return
+        const user = {_id : existingUser._id, username: existingUser.username, role: existingUser.role  ,createdAt : existingUser.createdAt};
+
+        res.status(200).json({token,user});
     };
 
 

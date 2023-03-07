@@ -19,6 +19,20 @@ Primary.args = {
     text: 'Description Description Description Description',
 };
 
+export const PrimaryInverted = Template.bind({});
+PrimaryInverted.args = {
+    title: 'Title lorem ipsun',
+    text: 'Description Description Description Description',
+    theme: TextTheme.PRIMARY_INVERTED,
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+    title: 'Title lorem ipsun',
+    text: 'Description Description Description Description',
+    theme: TextTheme.SECONDARY,
+};
+
 export const Error = Template.bind({});
 Error.args = {
     title: 'Title lorem ipsun',

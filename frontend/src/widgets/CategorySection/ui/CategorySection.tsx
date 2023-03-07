@@ -22,7 +22,7 @@ export const CategorySection = memo((props: CategorySectionProps) => {
     return (
         <div className={classNames(cls.CategorySection, {}, [className])}>
             <AccordionSection className={cls.Category} title={category.taskCategoryName}>
-                {category.tasks.map((task) => ( <TaskCard task={task}  /> ))}
+                {category.tasks.map((task) => ( <TaskCard task={task} key={task._id} /> ))}
             </AccordionSection>
         </div>
     );

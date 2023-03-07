@@ -1,6 +1,6 @@
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from './Select.module.scss'
-import {FC, SelectHTMLAttributes} from "react";
+import {FC, memo, SelectHTMLAttributes} from "react";
 
 export enum SelectTheme {
     PRIMARY = "",
@@ -28,7 +28,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
     options: Array<ISelectOption>;
 }
 
-export const Select: FC<SelectProps> = (props) => {
+export const Select: FC<SelectProps> = memo((props) => {
     const {
         className = "",
         children,
@@ -54,4 +54,4 @@ export const Select: FC<SelectProps> = (props) => {
             ))}
         </select>
     );
-};
+});

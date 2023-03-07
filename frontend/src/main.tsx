@@ -19,6 +19,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
               </ThemeProvider>
           </ErrorBoundary>
       </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
     </StoreProvider>,
 )

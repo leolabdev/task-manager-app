@@ -1,58 +1,71 @@
-import { classNames } from "@/shared/lib/classNames/classNames";
-import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
-import { useCallback, useState } from "react";
-import {LoginModal} from "@/features/AuthByUsername";
+import {classNames} from "@/shared/lib/classNames/classNames";
+import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
+import {memo, useCallback, useState} from "react";
+import {AuthModal} from "@/features/AuthByUsername";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserAuthData, userActions} from "@/entities/User";
+import {getUserAuthData, getUserUserData, userActions} from "@/entities/User";
 import cls from "./Navbar.module.scss";
 import {ThemeSwitcher} from "@/features/ThemeSwitcher";
+import {Text, TextTheme} from "@/shared/ui/Text/Text";
+import {logout} from "@/features/Logout";
+import {loginActions} from "@/features/AuthByUsername/modelLogin/slice/loginSlice";
+import {registerActions} from "@/features/AuthByUsername/modelRegister/slice/registerSlice";
+
 
 interface NavbarProps {
     className?: string;
 }
 
-export const Navbar = ({ className = "" }: NavbarProps) => {
+export const Navbar = memo(({ className = "" }: NavbarProps) => {
     const [isAuthModal, setIsAuthModal] = useState(false);
     const authData = useSelector(getUserAuthData);
+    const user = useSelector(getUserUserData);
+
     const dispatch = useDispatch();
     const onCloseModal = useCallback(() => {
         setIsAuthModal(false);
+        dispatch(loginActions.clearForm());
+        dispatch(registerActions.clearForm());
     }, []);
 
     const onShowModal = useCallback(() => {
       setIsAuthModal(true);
     }, []);
 
-    const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
+    const onLogout = useCallback(async () => {
+        await logout(dispatch);
     }, [dispatch]);
 
 
     if(authData) {
       return(
-        <div className={classNames(cls.Navbar, {}, [className])}>
+        <nav className={classNames(cls.Navbar, {}, [className])}>
             <ThemeSwitcher/>
-            <Button
-            theme={ButtonTheme.CLEAR_INVERTED}
-            className={cls.links}
-            onClick={onLogout}
-        >
-            {"Log out"}
-        </Button>
-      </div>
+
+            <div className={cls.linksLogged}>
+                {user && <Text text={user.username} theme={TextTheme.PRIMARY_INVERTED} className={cls.username}/>}
+                <Button
+                    theme={ButtonTheme.CLEAR_INVERTED}
+                    onClick={onLogout}
+                >
+                    {"Log out"}
+                </Button>
+            </div>
+
+      </nav>
       )}
 
     return (
-        <div className={classNames(cls.Navbar, {}, [className])}>
+        <nav className={classNames(cls.Navbar, {}, [className])}>
             <ThemeSwitcher/>
             <Button
                 theme={ButtonTheme.CLEAR_INVERTED}
                 className={cls.links}
                 onClick={onShowModal}
             >
-                {"login"}
+                {"Login/Register"}
             </Button>
-           <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
-        </div>
+           <AuthModal isOpen={isAuthModal} onClose={onCloseModal} />
+        </nav>
     );
-};
+});

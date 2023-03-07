@@ -1,6 +1,6 @@
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from './Input.module.scss'
-import {FC, InputHTMLAttributes, ChangeEventHandler} from "react";
+import {FC, InputHTMLAttributes, ChangeEventHandler, memo} from "react";
 
 export enum InputTheme {
     PRIMARY = "",
@@ -22,7 +22,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     disabled?: boolean;
 }
 
-export const Input: FC<InputProps> = (props) => {
+export const Input: FC<InputProps> = memo((props) => {
     const {
         className = "",
         children,
@@ -44,5 +44,5 @@ export const Input: FC<InputProps> = (props) => {
             {...otherProps}
         />
     );
-};
+});
 
