@@ -16,8 +16,8 @@ const MainPage = memo(() => {
     }
 
     const options : Array<ISelectOption> = [
-        { label: "perkele", value: "perkele" },
-        { label: "saatana", value: "saatana" }
+        { label: "test", value: "test" },
+        { label: "test", value: "test" }
     ]
 
 
