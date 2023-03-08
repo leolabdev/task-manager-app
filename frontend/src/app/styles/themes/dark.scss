@@ -1,14 +1,29 @@
+//.app_dark_theme {
+//  --bg-color: #090949;
+//  --inverted-bg-color: #e8e8ea;
+//  --primary-color: #04ff04;
+//  --secondary-color: #049604;
+//  --inverted-primary-color: #0452ff;
+//  --inverted-secondary-color: #0232c2;
+//  --border-color: #FFFFFF;
+//  // task priorities
+//  --low-priority-task-bg: rgba(0, 128, 0, 0.45);
+//  --medium-priority-task-bg: rgba(255, 255, 0, 0.45);
+//  --high-priority-task-bg: rgba(255, 0, 0, 0.45);
+//}
+
+
 .app_dark_theme {
-  --bg-color: #090949;
-  --inverted-bg-color: #e8e8ea;
-  --primary-color: #04ff04;
-  --secondary-color: #049604;
-  --inverted-primary-color: #0452ff;
-  --inverted-secondary-color: #0232c2;
-  --border-color: #FFFFFF;
+  --bg-color: #2a2b30;
+  --inverted-bg-color: #f2f2f7;
+  --primary-color: #f15a29;
+  --secondary-color: #ffd700;
+  --inverted-primary-color: #604242;
+  --inverted-secondary-color: #8bc34a;
+  --border-color: #47484e;
   // task priorities
-  --low-priority-task-bg: rgba(0, 128, 0, 0.45);
-  --medium-priority-task-bg: rgba(255, 255, 0, 0.45);
-  --high-priority-task-bg: rgba(255, 0, 0, 0.45);
+  --low-priority-task-bg: rgba(0, 255, 0, 0.1);
+  --medium-priority-task-bg: rgba(255, 255, 0, 0.1);
+  --high-priority-task-bg: rgba(255, 0, 0, 0.1);
 }
 

@@ -1,6 +1,6 @@
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from './Input.module.scss'
-import {FC, InputHTMLAttributes, ChangeEventHandler, memo} from "react";
+import {FC, InputHTMLAttributes, memo} from "react";
 
 export enum InputTheme {
     PRIMARY = "",
@@ -23,6 +23,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
 }
 
 export const Input: FC<InputProps> = memo((props) => {
+
+
+
     const {
         className = "",
         children,

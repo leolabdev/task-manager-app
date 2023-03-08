@@ -2,7 +2,6 @@ import { classNames } from "@/shared/lib/classNames/classNames";
 import {ButtonHTMLAttributes, FC, memo} from "react";
 import cls from "./Button.module.scss";
 
-
 /**
  * Module containing a React Button component with customizable themes, sizes, and square styling.
  * @module Button
@@ -45,6 +44,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 
 export const Button: FC<ButtonProps> = memo((props) => {
+
+
+
     const {
         className = "",
         children,

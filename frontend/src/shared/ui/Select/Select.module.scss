@@ -4,6 +4,23 @@
   cursor: pointer;
 }
 
+
+//.option{
+//  padding: 6px 15px;
+//  cursor: pointer;
+//  background-color: red;
+//}
+//
+//.option:focus {
+//  background-color: blue;
+//  cursor: pointer;
+//}
+//
+//.option:hover {
+//  //background-color: blue;
+//  cursor: pointer;
+//}
+
 .clear,
 .clearInverted {
   padding: 0;
@@ -23,7 +40,6 @@
 
 .backgroundInverted {
   background: var(--inverted-bg-color);
-  color: var(--inverted-primary-color);
   opacity: 0.95;
   border: none;
 }
@@ -43,3 +59,5 @@
 .disabled {
   opacity: 0.5;
 }
+
+

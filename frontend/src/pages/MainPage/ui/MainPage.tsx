@@ -1,9 +1,8 @@
-import {ThemeSwitcher} from "@/features/ThemeSwitcher";
 import {Input, InputTheme} from "@/shared/ui/Input/Input";
-import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
+import {Button} from "@/shared/ui/Button/Button";
 import {ChangeEvent, memo, useState} from "react";
-import {ISelectOption, Select, SelectTheme} from "@/shared/ui/Select/Select";
-import {ITask, TaskCard, TaskPriority} from "@/entities/Task";
+import {ISelectOption, Select} from "@/shared/ui/Select/Select";
+import {ITask, TaskPriority} from "@/entities/Task";
 import {ICategory} from "@/entities/Category";
 import {CategorySection} from "@/widgets/CategorySection";
 
@@ -14,6 +13,7 @@ const MainPage = memo(() => {
     const handleChange = (e: any) => {
         setValue(e.target.value);
     }
+
 
     const options : Array<ISelectOption> = [
         { label: "test1", value: "test1" },
@@ -40,9 +40,9 @@ const MainPage = memo(() => {
           <div>
               <br/>
           </div>
-            <Input theme={InputTheme.PRIMARY} value={value} onChange={handleChange} placeholder='kek'/><br/><br/>
-            <Button theme={ButtonTheme.PRIMARY}> lol </Button><br/><br/>
-            <Select theme={SelectTheme.PRIMARY} options={ options } value={selectedOption} onChange={handleSelectChange} /><br/>
+            <Input  value={value} onChange={handleChange} placeholder='kek'/><br/><br/>
+            <Button > lol </Button><br/><br/>
+            <Select options={ options } value={selectedOption} onChange={handleSelectChange} /><br/>
             {/*<TaskCard task={tasks[1]}/>*/}
             {value}
             {selectedOption}

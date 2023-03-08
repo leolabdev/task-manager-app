@@ -2,6 +2,7 @@ import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from './Select.module.scss'
 import {FC, memo, SelectHTMLAttributes} from "react";
 
+
 export enum SelectTheme {
     PRIMARY = "",
     CLEAR = "clear",
@@ -29,6 +30,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
 }
 
 export const Select: FC<SelectProps> = memo((props) => {
+
     const {
         className = "",
         children,
@@ -50,7 +52,7 @@ export const Select: FC<SelectProps> = memo((props) => {
             {...otherProps}
         >
             {options.map((option) => (
-                <option value={option.value} key={option.value}>{option.label}</option>
+                <option className={cls.option} value={option.value} key={option.value}>{option.label}</option>
             ))}
         </select>
     );

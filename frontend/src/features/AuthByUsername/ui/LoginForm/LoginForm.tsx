@@ -74,7 +74,7 @@
 
 import { classNames } from "@/shared/lib/classNames/classNames";
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
-import { Input } from "@/shared/ui/Input/Input";
+import {Input, InputTheme} from "@/shared/ui/Input/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {ChangeEvent, memo, useCallback, useState} from "react";
 import { Text, TextTheme } from "@/shared/ui/Text/Text";
@@ -140,6 +140,7 @@ export const LoginForm = memo(({className= ''}: LoginFormProps) => {
             <Text title={"Login Form"}/>
             {lastError && <Text text={lastError} theme={TextTheme.ERROR}/>}
             <Input
+                // theme={InputTheme.BACKGROUND_INVERTED}
                 autoFocus
                 type="text"
                 className={cls.input}
@@ -148,6 +149,7 @@ export const LoginForm = memo(({className= ''}: LoginFormProps) => {
                 value={username}
             />
             <Input
+                // theme={InputTheme.BACKGROUND_INVERTED}
                 type="password"
                 className={cls.input}
                 placeholder={'password'}

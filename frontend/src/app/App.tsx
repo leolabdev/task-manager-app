@@ -16,12 +16,12 @@ const App = memo(() => {
 
     return(
         <div className={classNames("app", {}, [])}>
-            {/*<Suspense fallback="">*/}
+            <Suspense fallback="">
                 <Navbar />
                 <div className="content-page">
                     <AppRouter />
                 </div>
-            {/*</Suspense>*/}
+            </Suspense>
         </div>
     )});
 export default App;

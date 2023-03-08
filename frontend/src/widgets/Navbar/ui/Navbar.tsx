@@ -43,9 +43,9 @@ export const Navbar = memo(({ className = "" }: NavbarProps) => {
             <ThemeSwitcher/>
 
             <div className={cls.linksLogged}>
-                {user && <Text text={user.username} theme={TextTheme.PRIMARY_INVERTED} className={cls.username}/>}
+                {user && <Text text={user.username}  className={cls.username}/>}
                 <Button
-                    theme={ButtonTheme.CLEAR_INVERTED}
+                    theme={ButtonTheme.CLEAR}
                     onClick={onLogout}
                 >
                     {"Log out"}
@@ -57,9 +57,9 @@ export const Navbar = memo(({ className = "" }: NavbarProps) => {
 
     return (
         <nav className={classNames(cls.Navbar, {}, [className])}>
-            <ThemeSwitcher/>
+            <ThemeSwitcher className={cls.themeBlock}/>
             <Button
-                theme={ButtonTheme.CLEAR_INVERTED}
+                theme={ButtonTheme.CLEAR}
                 className={cls.links}
                 onClick={onShowModal}
             >

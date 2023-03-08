@@ -1,9 +1,9 @@
 .app_light_theme {
   --bg-color: #e8e8ea;
-  --inverted-bg-color: #090949;
+  --inverted-bg-color: rgba(70, 141, 56, 0.78);
   --primary-color: #0449e0;
   --secondary-color: #0232c2;
-  --inverted-primary-color: #04ff04;
+  --inverted-primary-color: #abc4e7;
   --inverted-secondary-color: #049604;
   --border-color: #000;
   // task priorities
@@ -13,4 +13,17 @@
 }
 
 
-//background-color: rgba(152, 152, 189, 0.3);
+//.app_light_theme {
+//  --bg-color: rgba(218, 218, 186, 0.98);
+//  --inverted-bg-color: #e8e8ea;
+//  --primary-color: #212529;
+//  --secondary-color: #484848;
+//  --inverted-primary-color: #F1F1F1;
+//  --inverted-secondary-color: #009688;
+//  --border-color: #009688;
+//  --low-priority-task-bg: rgba(118, 230, 103, 0.3);
+//  --medium-priority-task-bg: rgba(255, 198, 56, 0.3);
+//  --high-priority-task-bg: rgba(255, 69, 0, 0.3);
+//}
+
+

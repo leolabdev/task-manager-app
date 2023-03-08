@@ -15,12 +15,12 @@ export const parameters = {
     default: "light",
     list: [
       { name: "light", class: ["app", "app_light_theme"], color: "#bda692" },
-      { name: "dark", class: ["app", "app_dark_theme"], color: "#111110" },
+      { name: "dark", class: ["app", "app_dark_theme"], color: "#563333" },
+      { name: "matrix", class: ["app", "app_matrix_theme"], color: "#07ce07" },
     ],
   },
 
 };
 
 addDecorator(withThemes);
-// addDecorator(TranslationDecorator);
 addDecorator(RouterDecorator);

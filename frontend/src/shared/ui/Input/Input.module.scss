@@ -29,10 +29,6 @@
 
 .backgroundInverted {
   background: var(--inverted-bg-color);
-  color: var(--inverted-primary-color);
-  ::placeholder {
-    color: var(--inverted-primary-color);
-  }
   border: none;
 }
 

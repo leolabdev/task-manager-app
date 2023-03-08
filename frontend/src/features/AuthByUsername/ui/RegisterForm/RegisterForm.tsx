@@ -1,13 +1,13 @@
-import { classNames } from "@/shared/lib/classNames/classNames";
-import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
-import { Input } from "@/shared/ui/Input/Input";
-import { useDispatch, useSelector } from "react-redux";
+import {classNames} from "@/shared/lib/classNames/classNames";
+import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
+import {Input, InputTheme} from "@/shared/ui/Input/Input";
+import {useDispatch, useSelector} from "react-redux";
 import {ChangeEvent, memo, useCallback, useState} from "react";
-import { Text, TextTheme } from "@/shared/ui/Text/Text";
-import { registerByUsername } from "../../modelRegister/services/registerByUsername/registerByUsername";
-import { registerActions } from "../../modelRegister/slice/registerSlice";
+import {Text, TextTheme} from "@/shared/ui/Text/Text";
+import {registerByUsername} from "../../modelRegister/services/registerByUsername/registerByUsername";
+import {registerActions} from "../../modelRegister/slice/registerSlice";
 import cls from "./RegisterForm.module.scss";
-import { getRegisterState } from "../../modelRegister/selectors/getRegisterState/getRegisterState";
+import {getRegisterState} from "../../modelRegister/selectors/getRegisterState/getRegisterState";
 import {getRegisterUsernameState} from "../../modelRegister/selectors/getRegisterUsernameState/getRegisterUsernameState";
 import {getRegisterPasswordState} from "../../modelRegister/selectors/getRegisterPasswordState/getRegisterPasswordState";
 
@@ -62,6 +62,7 @@ export const RegisterForm = memo(({className= ''}: RegisterFormProps) => {
             <Text title={"Register Form"}/>
             {lastError && <Text text={lastError} theme={TextTheme.ERROR}/>}
             <Input
+                // theme={InputTheme.BACKGROUND_INVERTED}
                 autoFocus
                 type="text"
                 className={cls.input}
@@ -70,6 +71,7 @@ export const RegisterForm = memo(({className= ''}: RegisterFormProps) => {
                 value={username}
             />
             <Input
+                // theme={InputTheme.BACKGROUND_INVERTED}
                 type="password"
                 className={cls.input}
                 placeholder={'password'}

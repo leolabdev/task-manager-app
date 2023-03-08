@@ -2,6 +2,7 @@
   width: 100%;
   height: var(--navbar-height);
   background: var(--inverted-bg-color);
+
   display: flex;
   justify-content: space-between;
 }
@@ -20,6 +21,11 @@
   display: flex;
   align-items: center;
 }
-.mainLink {
-  //margin-right: 15px;
+
+
+.themeBlock{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
 }

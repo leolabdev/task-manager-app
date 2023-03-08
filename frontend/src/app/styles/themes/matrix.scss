@@ -1,0 +1,16 @@
+.app_matrix_theme {
+  //--bg-color: #090949;
+  --bg-color: #03035d;
+  --inverted-bg-color: rgb(51, 51, 122);
+  //--inverted-bg-color: rgb(233, 233, 243);
+  --primary-color: #04ad04;
+  --secondary-color: #04ff04;
+  --inverted-primary-color: #0452ff;
+  --inverted-secondary-color: #0232c2;
+  --border-color: #0f4e94;
+  // task priorities
+  --low-priority-task-bg: rgba(0, 229, 0, 0.2);
+  --medium-priority-task-bg: rgba(255, 255, 0, 0.2);
+  --high-priority-task-bg: rgba(255, 0, 0, 0.2);
+}
+
