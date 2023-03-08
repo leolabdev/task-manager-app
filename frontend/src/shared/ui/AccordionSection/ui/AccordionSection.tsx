@@ -33,7 +33,7 @@ export const AccordionSection: FC<AccordionSectionProps> = memo(({className='', 
                 <Text theme={TextTheme.PRIMARY} title={title}/>
                 <Button square onClick={handleCollapse} size={ButtonSize.L}>{collapsed ? "⇣" : "⇡"}</Button>
             </div>
-            <div onClick={handleCollapse} className={classNames(cls.marginDiv, { [cls.unCollapsed]: !collapsed})}></div>
+            <div onClick={handleCollapse} className={classNames(cls.marginDiv, { [cls.unCollapsed]: !collapsed})}/>
             <div className={classNames(cls.accordionContent, mods)}>
                 {children}
             </div>
