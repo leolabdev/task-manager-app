@@ -6,6 +6,12 @@ export interface ICategory {
     _id: string;
     taskCategoryName: string;
     user: User;
-    tasks: ITask[];
-    __v: number;
+    tasks?: ITask[];
+    __v?: number;
+}
+
+export interface CategoriesSchema {
+    categories: ICategory[];
+    loading: boolean;
+    error: string | null;
 }

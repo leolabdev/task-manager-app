@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {User, userActions} from '@/entities/User';
+import {IUser, userActions} from '@/entities/User';
 import {loginActions} from "../../slice/loginSlice";
 import {object, string, ValidationError} from "yup";
 
@@ -20,18 +20,21 @@ interface LoginByUsernameProps {
     password: string;
 }
 
-export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { rejectValue: string}>(
+export const loginByUsername = createAsyncThunk<IUser, LoginByUsernameProps, { rejectValue: string}>(
     'login/loginByUsername',
     async (authData, thunkAPI) => {
         try {
             // Validate authData using the LoginByUsernameSchema
             await LoginByUsernameSchema.validate(authData);
 
-            const response = await axios.post<User>(`${import.meta.env.VITE_API}/login`, authData);
+            const response = await axios.post<IUser>(`${import.meta.env.VITE_API}/login`, authData);
 
             if (!response.data) {
                 throw new Error();
             }
+
+            // console.log(response);
+
             thunkAPI.dispatch(userActions.setAuthData(response.data));
             thunkAPI.dispatch(loginActions.clearForm());
 

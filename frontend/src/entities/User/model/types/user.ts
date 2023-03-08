@@ -4,7 +4,7 @@ export enum UserRole {
     admin = 'admin'
 }
 
-export interface User {
+export interface IUser {
     _id: string;
     username: string;
     role: string;
@@ -14,5 +14,5 @@ export interface User {
 
 export interface UserSchema {
     token?: string;
-    user?: User;
+    user?: IUser;
 }

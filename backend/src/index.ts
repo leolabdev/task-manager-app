@@ -36,7 +36,16 @@ const app: Express = express();
 // Apply middleware
 app.use(cookieParser());
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://127.0.0.1:5173', 'http://localhost:8080'], // Add your domains here
+    credentials: true, // Enable credentials (cookies)
+}));
+// app.use(cors({
+//     origin: '*', // Allow requests from any origin
+//     credentials: true, // Enable credentials (cookies)
+// }));
+app.use(express.json());
+
 app.use(express.json());
 
 // Define routes

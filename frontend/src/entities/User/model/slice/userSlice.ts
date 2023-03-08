@@ -1,10 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {USER_LOCALSTORAGE_KEY} from "@/shared/const/localstorage";
-import {User, UserSchema} from "../types/user";
+import {UserSchema} from "../types/user";
 import {setCookieWithExpirationTime} from "@/shared/lib/webStorages/setCookieWithExpirationTime";
-import {USER_COOKIES_TOKEN_KEY} from "@/shared/const/cookies";
+import {USER_COOKIES,USER_COOKIES_TOKEN_KEY} from "@/shared/const/cookies";
 import {deleteCookie} from "@/shared/lib/webStorages/deleteCookie";
-// import {getCookieValue} from "@/shared/lib/cookies/getCookieValue";
 import {getCookieValue} from "@/shared/lib/webStorages/getCookieValue";
 
 const initialState: UserSchema = {};
@@ -43,3 +42,6 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { actions: userActions } = userSlice;
 export const { reducer: userReducer } = userSlice;
+
+
+

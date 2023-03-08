@@ -52,6 +52,7 @@ class AuthController {
     public login = async (req: Request, res: Response) => {
         const { username, password } = req.body;
 
+
         // Check if user with the username exists
         const existingUser = await this.userService.getByUserName(username);
         // console.log(existingUser);
