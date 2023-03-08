@@ -1,9 +1,38 @@
 .AccordionSection {
-  padding: 20px;
   border: 1px solid var(--border-color);
+  margin-bottom: 10px;
+  padding: 20px;
 }
 
-.accordionHeader{
+.AccordionSection.collapsed{
+  cursor: pointer;
+}
+
+.AccordionSection .accordionHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.AccordionSection .accordionHeader button{
+  user-select: none;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.accordionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  height: auto;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.accordionContent.collapsed {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
 }

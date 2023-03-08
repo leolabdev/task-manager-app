@@ -1,28 +1,41 @@
 import {classNames} from "@/shared/lib/classNames/classNames";
 import cls from './AccordionSection.module.scss'
-import {FC, memo, ReactNode} from "react";
+import {FC, memo, ReactNode, useState} from "react";
 import {Button, ButtonSize} from "@/shared/ui/Button/Button";
 import {Text, TextTheme} from "@/shared/ui/Text/Text";
 
 interface AccordionSectionProps {
     className?: string;
     isCollapsed?: boolean;
-    onClose?: () => void;
+    onCollapse?: () => void;
     title?: string;
     children?: ReactNode;
 }
 
-export const AccordionSection: FC<AccordionSectionProps> = memo(({className='', isCollapsed , onClose, title='Here is title', children}: AccordionSectionProps) => {
+export const AccordionSection: FC<AccordionSectionProps> = memo(({className='', isCollapsed=false, onCollapse, title='Here is title', children}: AccordionSectionProps) => {
+
+    const [collapsed, setCollapsed] = useState(isCollapsed);
+
+    const handleCollapse = () => {
+        setCollapsed(!collapsed);
+        onCollapse && onCollapse();
+    };
+
+    const mods = {
+        [cls.collapsed]: collapsed
+    }
+
+    const wrapperOnClick = collapsed ? handleCollapse : undefined;
 
     return (
-        <div className={classNames(cls.AccordionSection, {}, [className])}>
-            <div className={cls.accordionHeader}>
-                {/*<h3>{   title}</h3>*/}
-                <Text  theme={TextTheme.PRIMARY} title={title}/>
-
-                <Button square size={ButtonSize.L}>{isCollapsed ? "x" : "->"}</Button>
+        <div onClick={wrapperOnClick} className={classNames(cls.AccordionSection, mods, [className])}>
+            <div className={cls.accordionHeader} onClick={handleCollapse}>
+                <Text theme={TextTheme.PRIMARY} title={title}/>
+                <Button square onClick={handleCollapse} size={ButtonSize.L}>{collapsed ? "⇣" : "⇡"}</Button>
             </div>
-            {children}
+            <div className={classNames(cls.accordionContent, mods)}>
+                {children}
+            </div>
         </div>
     );
 });
