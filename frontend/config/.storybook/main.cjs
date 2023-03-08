@@ -1,5 +1,6 @@
 const path = require('path');
 const svgr = require("vite-plugin-svgr");
+import "../../src/app/styles/index.scss";
 
 module.exports = {
   "stories": [
