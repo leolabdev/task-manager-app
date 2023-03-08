@@ -28,7 +28,7 @@ export const CategorySection = memo((props: CategorySectionProps) => {
 
     return (
         <div className={classNames(cls.CategorySection, {}, [className])}>
-            <AccordionSection className={cls.Category} title={category.taskCategoryName} isCollapsed={isCollapsed} onCollapse={onCollapse}>
+            <AccordionSection className={cls.Category} title={`Category: ${category.taskCategoryName}`} isCollapsed={isCollapsed} onCollapse={onCollapse}>
                 <div className={cls.CategoryContent}>
                 {category.tasks.map((task) => ( <TaskCard task={task} key={task._id} /> ))}
                 </div>
