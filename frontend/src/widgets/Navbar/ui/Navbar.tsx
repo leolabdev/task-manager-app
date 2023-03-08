@@ -40,8 +40,7 @@ export const Navbar = memo(({ className = "" }: NavbarProps) => {
     if(authData) {
       return(
         <nav className={classNames(cls.Navbar, {}, [className])}>
-            <ThemeSwitcher/>
-
+            <ThemeSwitcher className={cls.themeBlock}/>
             <div className={cls.linksLogged}>
                 {user && <Text text={user.username}  className={cls.username}/>}
                 <Button
