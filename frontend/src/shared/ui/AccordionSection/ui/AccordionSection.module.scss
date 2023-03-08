@@ -14,8 +14,8 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  margin-bottom: 10px;
   cursor: pointer;
+  user-select: none;
 }
 
 .AccordionSection .accordionHeader button{
@@ -34,4 +34,13 @@
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease;
+}
+
+.marginDiv{
+  height: 10px;
+  cursor: pointer;
+}
+
+.marginDiv.unCollapsed{
+  height: 20px;
 }
