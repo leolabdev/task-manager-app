@@ -33,27 +33,25 @@ export const RegisterForm = memo(({className= ''}: RegisterFormProps) => {
         dispatch(registerActions.setPassword(event.target.value));
     }, [dispatch]);
 
-    const onRegisterClick = useCallback((e) => {
+    const onRegisterClick = useCallback(async (e) => {
         e.preventDefault();
-        // @ts-ignore
-        dispatch(registerByUsername({username, password}))
-            .unwrap()
-            .then(() => {
-                setLastError('');
-            })
-            .catch((error) => {
-                console.log(error);
-                let newError;
-                if (error && error.message) {
-                    newError = error.message;
-                } else {
-                    newError = "Server error, try again later";
-                }
-                if (newError !== lastError) {
-                    setLastError(newError);
-                }
-            });
+        try {
+            // @ts-ignore
+            await dispatch(registerByUsername({ username, password })).unwrap();
+            setLastError('');
+        } catch (error) {
+            let newError;
+            if (error && error.message) {
+                newError = error.message;
+            } else {
+                newError = 'Server error, try again later';
+            }
+            if (newError !== lastError) {
+                setLastError(newError);
+            }
+        }
     }, [dispatch, password, username, lastError]);
+
 
     if (error && lastError !== error) {
         setLastError(error);

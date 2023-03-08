@@ -108,28 +108,28 @@ export const LoginForm = memo(({className= ''}: LoginFormProps) => {
 
     const [lastError, setLastError] = useState('');
 
-    const onLoginClick = useCallback((e) => {
+    const onLoginClick = useCallback(async (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        // @ts-ignore
-        return dispatch(loginByUsername({username, password}))
-            .then((result) => {
-                // Reset last error if login succeeds
-                setLastError('');
-                return result;
-            })
-            .catch((error) => {
-                let newError;
-                if (error && error.message) {
-                    newError = error.message;
-                } else {
-                    newError = "Server error, try again later";
-                }
-                if (newError !== lastError) {
-                    setLastError(newError);
-                }
-            });
-    },[dispatch, password, username, lastError]);
+
+        try {
+            // @ts-ignore
+            const result = await dispatch(loginByUsername({ username, password }));
+            // Reset last error if login succeeds
+            setLastError('');
+            return result;
+        } catch (error) {
+            let newError;
+            if (error && error.message) {
+                newError = error.message;
+            } else {
+                newError = 'Server error, try again later';
+            }
+            if (newError !== lastError) {
+                setLastError(newError);
+            }
+        }
+    }, [dispatch, password, username, lastError]);
+
 
     if (error && lastError !== error) {
         setLastError(error);
