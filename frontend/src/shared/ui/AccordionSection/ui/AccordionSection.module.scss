@@ -1,7 +1,8 @@
 .AccordionSection {
   border: 1px solid var(--border-color);
-  margin-bottom: 10px;
-  padding: 20px;
+  margin-top: 10px;
+  padding: 0 20px;
+
 }
 
 .AccordionSection.collapsed{
@@ -12,7 +13,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
@@ -23,11 +25,8 @@
 }
 
 .accordionContent {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
   height: auto;
-  overflow: hidden;
+  overflow: auto;
   transition: height 0.3s ease;
 }
 

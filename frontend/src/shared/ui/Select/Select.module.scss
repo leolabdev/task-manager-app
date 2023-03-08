@@ -1,6 +1,7 @@
 .Select {
   color: var(--primary-color);
   padding: 6px 15px;
+  cursor: pointer;
 }
 
 .clear,
@@ -10,17 +11,20 @@
 
 .clearInverted {
   color: var(--inverted-primary-color);
+  opacity: 0.95;
 }
 
 .background {
   background: var(--bg-color);
   color: var(--primary-color);
+  opacity: 0.95;
   border: none;
 }
 
 .backgroundInverted {
   background: var(--inverted-bg-color);
   color: var(--inverted-primary-color);
+  opacity: 0.95;
   border: none;
 }
 

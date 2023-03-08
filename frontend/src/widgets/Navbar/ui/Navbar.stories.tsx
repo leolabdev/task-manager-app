@@ -22,5 +22,5 @@ Primary.decorators = [StoreDecorator({
 export const AuthNavbar = Template.bind({});
 AuthNavbar.args = {};
 AuthNavbar.decorators = [StoreDecorator({
-  user: { authData: {} },
+  user: { user : { _id: '1'}},
 })];

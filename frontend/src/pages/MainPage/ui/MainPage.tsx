@@ -40,10 +40,10 @@ const MainPage = memo(() => {
           <div>
               <br/>
           </div>
-            <Input theme={InputTheme.BACKGROUND_INVERTED} value={value} onChange={handleChange} placeholder='kek'/><br/><br/>
-            <Button theme={ButtonTheme.BACKGROUND_INVERTED}> lol </Button><br/><br/>
-            <Select theme={SelectTheme.BACKGROUND_INVERTED} options={ options } value={selectedOption} onChange={handleSelectChange} /><br/>
-            <TaskCard task={tasks[1]}/>
+            <Input theme={InputTheme.PRIMARY} value={value} onChange={handleChange} placeholder='kek'/><br/><br/>
+            <Button theme={ButtonTheme.PRIMARY}> lol </Button><br/><br/>
+            <Select theme={SelectTheme.PRIMARY} options={ options } value={selectedOption} onChange={handleSelectChange} /><br/>
+            {/*<TaskCard task={tasks[1]}/>*/}
             {value}
             {selectedOption}
             <CategorySection category={categories[0]}/>

@@ -1,6 +1,9 @@
 .Input {
   color: var(--primary-color);
   padding: 6px 15px;
+  &::placeholder {
+    color: var(--primary-color);
+  }
 }
 
 .clear,
@@ -10,17 +13,26 @@
 
 .clearInverted {
   color: var(--inverted-primary-color);
+  &::placeholder {
+    color: var(--inverted-primary-color);
+  }
 }
 
 .background {
   background: var(--bg-color);
   color: var(--primary-color);
   border: none;
+  ::placeholder {
+    color: var(--primary-color);
+  }
 }
 
 .backgroundInverted {
   background: var(--inverted-bg-color);
   color: var(--inverted-primary-color);
+  ::placeholder {
+    color: var(--inverted-primary-color);
+  }
   border: none;
 }
 

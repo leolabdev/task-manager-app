@@ -4,7 +4,7 @@ import {FC, memo, ReactNode, useState} from "react";
 import {Button, ButtonSize} from "@/shared/ui/Button/Button";
 import {Text, TextTheme} from "@/shared/ui/Text/Text";
 
-interface AccordionSectionProps {
+export interface AccordionSectionProps {
     className?: string;
     isCollapsed?: boolean;
     onCollapse?: () => void;
