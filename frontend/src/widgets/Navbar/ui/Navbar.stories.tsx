@@ -1,8 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import {StoreDecorator} from "@/shared/config/storybook/StoreDecorator/StoreDecorator";
 import { Navbar } from './Navbar';
+import '../../../app/styles/index.scss'
+
+
 
 export default {
   title: 'widgets/Navbar',
@@ -21,6 +23,7 @@ Primary.decorators = [StoreDecorator({
 
 export const AuthNavbar = Template.bind({});
 AuthNavbar.args = {};
+
 AuthNavbar.decorators = [StoreDecorator({
   user: { user : { _id: '1'}},
 })];
