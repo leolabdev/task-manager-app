@@ -1,13 +1,13 @@
 import { useGetCategoriesQuery } from "@/entities/Category";
 import { CategorySection } from "@/widgets/CategorySection";
 import {Loader} from "@/shared/ui/Loader";
-import {memo} from "react";
-
+import {memo, useEffect} from "react";
+import {useSelector} from "react-redux";
+import {getUserAuthData} from "@/entities/User";
 const MainPage = memo(() => {
-    // Fetch categories and their associated tasks using RTK Query
-    const { data: categoriesData, isLoading, isError } = useGetCategoriesQuery();
 
-    // console.log(categoriesData)
+    const authData = useSelector(getUserAuthData);
+    const { data: categoriesData, isLoading, isError} = useGetCategoriesQuery();
 
     if (isLoading) {
         return <Loader/>;
@@ -17,17 +17,23 @@ const MainPage = memo(() => {
         return <div>Error fetching categories.</div>;
     }
 
+    if(authData){
+        return (
+            <>
+                {categoriesData.map((category) => (
+                    <CategorySection key={category._id} category={category} />
+                ))}
+            </>
+        );
+    }
+
     return (
         <>
-            <div>
-                <br />
-            </div>
-
-            {categoriesData.map((category) => (
-                <CategorySection key={category._id} category={category} />
-            ))}
+            Please, log in to see your tasks.
         </>
-    );
+    )
+
+
 });
 
 export default MainPage;
