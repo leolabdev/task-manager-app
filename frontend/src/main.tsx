@@ -9,7 +9,7 @@ import {StoreProvider} from "@/app/providers/StoreProvider";
 
 
 import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "@/dev";
+import {ComponentPreviews, useInitial} from "../src/dev";
 
 
 

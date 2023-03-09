@@ -1,7 +1,7 @@
 import { useGetCategoriesQuery } from "@/entities/Category";
 import { CategorySection } from "@/widgets/CategorySection";
 import {Loader} from "@/shared/ui/Loader";
-import {memo, useEffect} from "react";
+import {ExoticComponent, memo, SuspenseProps} from "react";
 import {useSelector} from "react-redux";
 import {getUserAuthData} from "@/entities/User";
 const MainPage = memo(() => {

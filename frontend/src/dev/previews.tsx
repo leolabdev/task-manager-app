@@ -4,6 +4,8 @@ import PaletteTree from './palette';
 import App from "@/app/App";
 // import App from "../app/App";
 import {Button} from "@/shared/ui/Button/Button";
+import MainPage from "@/pages/MainPage/ui/MainPage";
+import {Text} from "@/shared/ui/Text/Text";
 
 export const ComponentPreviews = () => {
   return (
@@ -13,6 +15,12 @@ export const ComponentPreviews = () => {
       </ComponentPreview>
         <ComponentPreview path="/Button">
             <Button/>
+        </ComponentPreview>
+        <ComponentPreview path="/MainPage">
+            <MainPage/>
+        </ComponentPreview>
+        <ComponentPreview path="/Text">
+            <Text/>
         </ComponentPreview>
     </Previews>
   );
