@@ -5,11 +5,28 @@
 .Category{
 }
 
-.CategoryContent{
+.categoryContent{
   //margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 25px;
   margin-bottom: 20px;
+
+}
+
+.tasks{
+  display: flex;
+  align-items: self-start;
+  justify-content: center;
+  gap: 1px;
+}
+
+.taskCard{
+    width: 90%;
+}
+
+.deleteCard{
+  display: flex;
+  //border-left: initial;
 }
 

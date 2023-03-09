@@ -4,25 +4,33 @@ import {Loader} from "@/shared/ui/Loader";
 import {ExoticComponent, memo, SuspenseProps} from "react";
 import {useSelector} from "react-redux";
 import {getUserAuthData} from "@/entities/User";
+import {DeleteCategoryButton} from "@/features/DeleteCategoryById"
 const MainPage = memo(() => {
 
     const authData = useSelector(getUserAuthData);
-    const { data: categoriesData, isLoading, isError} = useGetCategoriesQuery();
+    const { data: categoriesData, isLoading,error, isError} = useGetCategoriesQuery();
 
     if (isLoading) {
         return <Loader/>;
     }
 
-    if (isError) {
-        return <div>Error fetching categories.</div>;
+    // @ts-ignore
+    if (error && error.data) {
+        // @ts-ignore
+        return <div>{error.data}</div>;
     }
 
     if(authData){
         return (
             <>
                 {categoriesData.map((category) => (
-                    <CategorySection key={category._id} category={category} />
-                ))}
+                    <div>
+                        <CategorySection key={category._id} category={category}/>
+
+                        <DeleteCategoryButton categoryId={category._id}/>
+                    </div>
+                ))
+                }
             </>
         );
     }

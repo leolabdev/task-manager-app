@@ -11,3 +11,8 @@ export interface ITask {
     deadlineTime: Date;
 }
 
+export interface TasksSchema {
+    tasks: ITask[];
+    loading: boolean;
+    error: string | null;
+}

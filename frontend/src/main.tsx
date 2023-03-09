@@ -6,13 +6,8 @@ import { ErrorBoundary } from "@/app/providers/ErrorBoundary";
 import App from "@/app/App";
 import '../src/app/styles/index.scss'
 import {StoreProvider} from "@/app/providers/StoreProvider";
-
-
 import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "../src/dev";
-
-
-
+import {ComponentPreviews, useInitial} from "@/shared/dev";
 createRoot(document.getElementById('root') as HTMLElement).render(
 
     <StoreProvider >
@@ -22,7 +17,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
               <ThemeProvider>
                   <DevSupport
                       // @ts-ignore
-                      ComponentPreviews={<ComponentPreviews />}
+                      ComponentPreviews={<ComponentPreviews/>}
                       useInitialHook={useInitial}
                   >
                   <App />

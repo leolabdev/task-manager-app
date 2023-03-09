@@ -1,0 +1,27 @@
+.ConfirmDialog {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  max-width: 100%;
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .message {
+    margin-bottom: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .cancelButton {
+    margin-right: 10px;
+  }
+}
