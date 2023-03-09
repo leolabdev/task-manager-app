@@ -20,7 +20,8 @@
     "react-router-dom": "^6.8.2",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-svgr": "^2.4.0",
-    "yup": "^1.0.2"
+    "yup": "^1.0.2",
+    "@react-buddy/ide-toolbox": "^2.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
