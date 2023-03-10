@@ -8,7 +8,7 @@ export interface ActionWithConfirmDialogProps {
     message: string;
     confirmLabel?: string;
     cancelLabel?: string;
-    onConfirm: () => void;
+    onConfirm?: () => void;
     onCancel?: () => void;
     onError?: (error: Error) => void;
     children: ReactNode;

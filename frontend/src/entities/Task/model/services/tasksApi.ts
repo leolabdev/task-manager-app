@@ -89,11 +89,18 @@ export const tasksApi = createApi({
                 result
                     ? result.map(({ _id, taskCategory }) => [
                         { type: 'Task' as const, id: _id },
-                        { type: 'Category' as const, id: taskCategory },
+                        { type: 'Category' as const, id: taskCategory._id },
                     ]).flat()
                     : [{ type: 'Task' as const, id: 'EMPTY' }],
         }),
-        createTask: builder.mutation<ITask, Partial<ITask>>({
+        getTask: builder.query<ITask, string>({
+            query: (taskId) => `tasks/${taskId}`,
+            providesTags: (result, error, taskId) => [
+                { type: 'Task' as const, id: taskId },
+                { type: 'Category' as const, id: 'ANY' },
+            ],
+        }),
+        createTask: builder.mutation<ITask, Omit<ITask, '_id'>>({
             query: (task) => ({
                 url: 'tasks',
                 method: 'POST',
@@ -101,7 +108,7 @@ export const tasksApi = createApi({
             }),
             invalidatesTags: ({taskCategory}) => [
                 { type: 'Task' as const, id: 'EMPTY' },
-                { type: 'Category' as const, id: taskCategory },
+                { type: 'Category' as const, id: taskCategory._id },
             ],
         }),
         deleteTask: builder.mutation<void, string>({
@@ -114,15 +121,15 @@ export const tasksApi = createApi({
                 { type: 'Category' as const, id: 'ANY' },
             ],
         }),
-        updateTask: builder.mutation<ITask, Partial<ITask>>({
-            query: (task) => ({
-                url: `tasks/${task._id}`,
+        updateTask: builder.mutation<ITask, { taskId: string, task: ITask }>({
+            query: ({taskId, task}) => ({
+                url: `tasks/${taskId}`,
                 method: 'PUT',
                 body: task,
             }),
-            invalidatesTags: (result, error, task) => [
+            invalidatesTags: (result, error, { task }) => [
                 { type: 'Task' as const, id: task?._id || 'EMPTY' },
-                { type: 'Category' as const, id: task?.taskCategory },
+                { type: 'Category' as const, id: task?.taskCategory._id },
             ],
         }),
     }),
@@ -130,6 +137,7 @@ export const tasksApi = createApi({
 
 export const {
     useGetTasksQuery,
+    useGetTaskQuery,
     useCreateTaskMutation,
     useDeleteTaskMutation,
     useUpdateTaskMutation,
@@ -139,5 +147,6 @@ export const resetTasks = async () => {
     const dispatch = useDispatch();
     await dispatch(tasksApi.util.invalidateTags(['Task', 'Category']));
 };
+
 
 

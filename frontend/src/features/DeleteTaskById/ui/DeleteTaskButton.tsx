@@ -16,7 +16,6 @@ export const DeleteTaskButton = memo(({ taskId, className }: DeleteTaskButtonPro
     const handleDeleteTask = useCallback(async () => {
         await deleteTask(taskId);
         if(!error) {
-            // todo find a better way to reset the categories
             await resetCategories();
         }
     }, [deleteTask, taskId]);

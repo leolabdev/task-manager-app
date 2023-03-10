@@ -5,6 +5,7 @@ import { AccordionSection } from "@/shared/ui/AccordionSection";
 import { TaskCard } from "@/entities/Task";
 import { ICategory } from "@/entities/Category";
 import {DeleteTaskButton} from "@/features/DeleteTaskById";
+import {UpdateTaskButton} from "@/features/UpdateTaskById";
 
 interface CategorySectionProps {
     className?: string;
@@ -21,6 +22,8 @@ export const CategorySection = ({ className, category }: CategorySectionProps) =
     //  the tasks array's memoization is necessary to prevent the TaskCard component from re-rendering
     const tasks = useMemo(() => category.tasks ?? [], [category.tasks]);
 
+
+
     return (
         <div className={classNames(cls.CategorySection, {}, [className])}>
             <AccordionSection
@@ -34,6 +37,7 @@ export const CategorySection = ({ className, category }: CategorySectionProps) =
                         <div key={task._id} className={cls.tasks}>
                             <TaskCard task={task} key={task._id} className={cls.taskCard} />
                             <DeleteTaskButton taskId={task._id} className={cls.deleteCard} />
+                            {/*<UpdateTaskButton taskId={task._id}  />*/}
                         </div>
                     ))}
                 </div>

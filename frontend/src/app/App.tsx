@@ -4,6 +4,7 @@ import {memo, Suspense, useEffect} from "react";
 import {userActions} from "@/entities/User";
 import {useDispatch} from "react-redux";
 import {Navbar} from "@/widgets/Navbar";
+import {Container} from "@/shared/ui/Container/Container";
 
 const App = memo(() => {
 
@@ -16,11 +17,14 @@ const App = memo(() => {
 
     return(
         <div className={classNames("app", {}, [])}>
+
             <Suspense fallback="">
                 <Navbar />
+                <Container>
                 <div className="content-page">
                     <AppRouter />
                 </div>
+                </Container>
             </Suspense>
         </div>
     )});

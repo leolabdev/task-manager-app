@@ -7,4 +7,4 @@ export {
     TaskCard
 };
 export type { ITask,TasksSchema};
-export {tasksApi, useUpdateTaskMutation, useDeleteTaskMutation, useGetTasksQuery, useCreateTaskMutation ,resetTasks} from "./model/services/tasksApi";
+export {tasksApi, useUpdateTaskMutation, useDeleteTaskMutation, useGetTasksQuery, useCreateTaskMutation , useGetTaskQuery,resetTasks} from "./model/services/tasksApi";

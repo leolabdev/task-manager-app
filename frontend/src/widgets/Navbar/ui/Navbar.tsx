@@ -8,8 +8,7 @@ import cls from "./Navbar.module.scss";
 import {ThemeSwitcher} from "@/features/ThemeSwitcher";
 import {Text, TextTheme} from "@/shared/ui/Text/Text";
 import {logout} from "@/features/Logout";
-import {loginActions} from "@/features/AuthByUsername/modelLogin/slice/loginSlice";
-import {registerActions} from "@/features/AuthByUsername/modelRegister/slice/registerSlice";
+import {registerActions,loginActions} from "@/features/AuthByUsername/";
 
 
 interface NavbarProps {
