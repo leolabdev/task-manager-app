@@ -1,6 +1,7 @@
 import {memo, useCallback, useEffect, useState} from 'react';
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button';
 import {UpdateTaskModal} from "@/features/UpdateTaskById/ui/UpdateModal/UpdateModal";
+import {resetCategories} from "@/entities/Category";
 
 interface UpdateTaskButtonProps {
     taskId: string;

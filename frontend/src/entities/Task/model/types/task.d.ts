@@ -13,6 +13,16 @@ export interface ITask {
     deadlineTime: string;
 }
 
+
+export interface ITaskUpdate{
+    _id?: string;
+    title?: string;
+    description?: string;
+    taskCategory?: string;
+    priority?: TaskPriority;
+    deadlineTime?: string;
+}
+
 export interface TasksSchema {
     tasks: ITask[];
     loading: boolean;

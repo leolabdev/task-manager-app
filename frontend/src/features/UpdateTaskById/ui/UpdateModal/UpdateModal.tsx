@@ -3,6 +3,7 @@ import {classNames} from "@/shared/lib/classNames/classNames";
 import {Modal} from "@/shared/ui/Modal/Modal";
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import {UpdateTaskForm} from "@/features/UpdateTaskById/ui/UpdateForm/UpdateForm";
+import {resetCategories} from "@/entities/Category";
 
 interface UpdateTaskModalProps {
     taskId: string;

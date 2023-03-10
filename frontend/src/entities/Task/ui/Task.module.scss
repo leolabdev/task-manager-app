@@ -3,6 +3,15 @@
   padding: 10px 20px;
 }
 
+.dateWrapper{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+
 .low{
   background-color: var(--low-priority-task-bg);
 }

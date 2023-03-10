@@ -11,7 +11,7 @@ interface PortalProps {
 
 
 
-// //todo for some reason storybook doesn't work with this correctly, it loozes styles
+// // //todo for some reason storybook doesn't work with this correctly, it loozes styles
 export const Portal = (props: PortalProps) => {
 
     const { children, element = document.body } = props;
@@ -25,7 +25,7 @@ export const Portal = (props: PortalProps) => {
 //     document.body.appendChild(wrapperElement);
 //     return wrapperElement;
 // }
-
+//
 // export const Portal = (props: PortalProps) => {
 //     const [wrapperElement, setWrapperElement] = useState(null);
 //

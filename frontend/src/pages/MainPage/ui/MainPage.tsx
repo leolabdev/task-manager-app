@@ -15,16 +15,17 @@ const MainPage = memo(() => {
     }
 
     // @ts-ignore
-    if (error && error.data) {
+    if (isError && error.data) {
         // @ts-ignore
-        return <div>{error.data}</div>;
+        return <div>{error.data.message}</div>;
     }
 
     if(authData){
+        console.log(authData)
         return (
             <>
                 {categoriesData.map((category) => (
-                    <div>
+                    <div key={category._id}>
                         <CategorySection key={category._id} category={category}/>
 
                         <DeleteCategoryButton categoryId={category._id}/>

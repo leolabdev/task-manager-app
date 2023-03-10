@@ -3,9 +3,15 @@
   --inverted-bg-color: rgba(70, 141, 56, 0.78);
   --primary-color: #0449e0;
   --secondary-color: #0232c2;
-  --inverted-primary-color: #abc4e7;
+  --inverted-primary-color: #f4f9fd;
   --inverted-secondary-color: #049604;
   --border-color: #000;
+
+  --delete-action-bg-color: rgb(213, 9, 9);
+  --delete-action-color: var(--inverted-primary-color);
+
+  --update-action-bg-color: rgba(70, 141, 56, 0.78);
+  --update-action-color: var(--inverted-primary-color);
   // task priorities
   --low-priority-task-bg: rgba(0, 128, 0, 0.45);
   --medium-priority-task-bg: rgba(255, 255, 0, 0.45);

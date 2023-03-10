@@ -36,8 +36,10 @@ export const CategorySection = ({ className, category }: CategorySectionProps) =
                     {tasks.map((task) => (
                         <div key={task._id} className={cls.tasks}>
                             <TaskCard task={task} key={task._id} className={cls.taskCard} />
-                            <DeleteTaskButton taskId={task._id} className={cls.deleteCard} />
-                            {/*<UpdateTaskButton taskId={task._id}  />*/}
+                            <div className={cls.cardButtons}>
+                            <DeleteTaskButton taskId={task._id} className={cls.deleteCardButton} />
+                            <UpdateTaskButton taskId={task._id}  className={cls.updateCardButton} />
+                            </div>
                         </div>
                     ))}
                 </div>

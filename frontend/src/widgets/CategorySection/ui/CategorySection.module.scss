@@ -22,11 +22,47 @@
 }
 
 .taskCard{
-    width: 90%;
+    width: 80%;
 }
 
-.deleteCard{
+//.cardButtons{
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//}
+//
+//.deleteCardButton{
+//  display: flex;
+//}
+//
+//.updateCardButton{
+//
+//}
+
+
+.cardButtons {
   display: flex;
-  //border-left: initial;
+  flex-direction: column;
+  //column-gap: 10px;
+  row-gap: 5px;
+  //justify-content: space-between;
+  //height: 80px;
+  //width: 80%;
+  max-width: 40px;
+}
+
+.deleteCardButton {
+  display: flex;
+  background-color: var(--delete-action-bg-color);
+  color: var(--delete-action-color);
+  border-radius: 5px;
+}
+
+.updateCardButton {
+  display: flex;
+  justify-content: center;
+  background-color: var(--update-action-bg-color);
+  color: var(--update-action-color);
+  border-radius: 5px;
 }
 

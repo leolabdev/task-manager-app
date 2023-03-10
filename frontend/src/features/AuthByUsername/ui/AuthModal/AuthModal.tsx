@@ -7,6 +7,7 @@ import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import {useDispatch} from "react-redux";
 import {registerActions} from "../../modelRegister/slice/registerSlice";
 import {loginActions} from "../../modelLogin/slice/loginSlice";
+import cls from "./AuthModal.module.scss";
 
 interface LoginModalProps {
     className?: string;
@@ -37,11 +38,14 @@ export const AuthModal = memo(
                 isOpen={isOpen}
                 onClose={onClose}
                 lazy
+
             >
+                <div className={cls.authModalContent}>
                 <Button theme={ButtonTheme.OUTLINE} onClick={toggleMode}>
                     ⇆
                 </Button>
                 {mode === AuthMode.login ? <LoginForm /> : <RegisterForm />}
+                </div>
             </Modal>
         );
     }

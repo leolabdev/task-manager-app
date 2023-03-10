@@ -8,6 +8,13 @@
   --inverted-primary-color: #0452ff;
   --inverted-secondary-color: #0232c2;
   --border-color: #0f4e94;
+
+  --delete-action-bg-color: rgba(241, 3, 3, 0.47);
+  --delete-action-color: var(--secondary-color);
+
+  --update-action-bg-color: rgb(51, 51, 122);
+  --update-action-color: var(--secondary-color);
+
   // task priorities
   --low-priority-task-bg: rgba(0, 229, 0, 0.2);
   --medium-priority-task-bg: rgba(255, 255, 0, 0.2);

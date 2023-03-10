@@ -1,0 +1,66 @@
+.UpdateForm {
+  display: flex;
+  flex-direction: column;
+  min-width: 30vw;
+}
+
+.updateForm__input {
+  margin-bottom: 16px;
+
+  input{
+    background-color: var(--background-color);
+  }
+
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  textarea {
+    height: 100px;
+    padding: 8px;
+    width: 100%;
+    max-width: 100%;
+    border: 3px solid var(--border-color);
+    border-radius: 4px;
+    resize: vertical;
+    //font-size: var(--f)
+    font: var(--font-m);
+    //line-height: 1.5;
+    color: var(--primary-color);
+    background-color: var(--bg-color);
+  }
+
+  select,
+  input[type="date"] {
+    height: 48px;
+    padding: 8px;
+    width: 100%;
+    max-width: 100%;
+    border: 3px solid var(--border-color);
+    border-radius: 4px;
+    font: var(--font-m);
+    background-color: var(--bg-color);
+
+    &::-webkit-calendar-picker-indicator {
+      background-color: var(--primary-color);
+    }
+
+
+    input[type="date"]::-webkit-calendar-color {
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+    }
+
+  }
+}
+
+.updateForm__submit {
+  border: 2px solid var(--border-color);
+
+  &:hover {
+    background-color: #e5e5e5;
+  }
+}

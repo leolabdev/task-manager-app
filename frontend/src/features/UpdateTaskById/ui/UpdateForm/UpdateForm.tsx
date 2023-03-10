@@ -1,24 +1,25 @@
 import {FC} from 'react';
-import { Formik, Form, Field } from 'formik';
-import { TaskPriority, useGetTasksQuery } from '@/entities/Task';
-import { Select } from '@/shared/ui/Select/Select';
-import { Input } from '@/shared/ui/Input/Input';
-import { useGetCategoriesQuery } from '@/entities/Category';
+import {Field, Form, Formik} from 'formik';
+import {ITaskUpdate, TaskPriority, useGetTasksQuery, useUpdateTaskMutation} from '@/entities/Task';
+import {Select} from '@/shared/ui/Select/Select';
+import {Input} from '@/shared/ui/Input/Input';
+import {resetCategories, useGetCategoriesQuery} from '@/entities/Category';
+import cls from './UpdateForm.module.scss';
+import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
+
 
 interface UpdateTaskSchema {
+    _id?: string;
     title: string;
     description?: string;
-    taskCategory: {
-        _id: string;
-        taskCategoryName: string;
-    };
+    taskCategory?: string;
     deadlineTime: string;
     priority: TaskPriority;
 }
 
 interface UpdateTaskFormProps {
     taskId: string;
-    onSubmit?: (values: UpdateTaskSchema) => void;
+    onSubmit?: () => void;
 }
 
 interface TextAreaInputProps {
@@ -28,9 +29,12 @@ interface TextAreaInputProps {
 }
 
 export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => {
-    const { data: tasks } = useGetTasksQuery();
+    const {data: tasks} = useGetTasksQuery();
     const task = tasks?.find((task) => task._id === taskId);
-    const { data: allCategories } = useGetCategoriesQuery();
+    const {data: allCategories} = useGetCategoriesQuery();
+
+    const [updateTask, {error}] = useUpdateTaskMutation();
+
     const categoriesForSelect = allCategories?.map((category) => ({
         label: category.taskCategoryName,
         value: category._id,
@@ -39,7 +43,7 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
 
     const prevValues: UpdateTaskSchema | undefined = task
         ? {
-            taskCategory: task.taskCategory,
+            taskCategory: task.taskCategory._id,
             title: task.title,
             description: task.description,
             deadlineTime: task.deadlineTime,
@@ -47,31 +51,54 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
         }
         : undefined;
 
-    const TextAreaInput: FC<TextAreaInputProps> = ({field, form, value, ...props}) => {
-        return <textarea {...field} {...props} value={value} />;
+    const TextAreaInput: FC<TextAreaInputProps> = ({ field, form, ...props }) => {
+        return <textarea {...field} {...props} />;
     };
 
+
+    const handleUpdateTask = async (values: UpdateTaskSchema) => {
+        try {
+            const taskUpdate: ITaskUpdate = {
+                title: values.title,
+                description: values.description,
+                taskCategory: values.taskCategory,
+                deadlineTime: values.deadlineTime,
+                priority: values.priority,
+            };
+            await updateTask({taskId, task: taskUpdate});
+            if (!error) {
+                //todo fix this...
+                window.location.reload();
+            }
+            onSubmit && onSubmit();
+        } catch (error) {
+            alert(error);
+            console.error(error);
+        }
+    };
+
+
+
     return (
-        <Formik initialValues={prevValues || {} as UpdateTaskSchema} onSubmit={onSubmit}>
+        <div className={cls.UpdateForm}>
+        <Formik initialValues={prevValues || {} as UpdateTaskSchema} onSubmit={handleUpdateTask}>
             {() => (
                 <Form>
-                    <div>
+                    <div className={cls.updateForm__input}>
                         <label htmlFor="title">Title</label>
-                        <Field name="title" as={Input} />
+                        <Field name="title" as={Input}/>
                     </div>
 
-                    <div>
+                    <div className={cls.updateForm__input}>
                         <label htmlFor="description">Description</label>
                         <Field
                             name="description"
                             as={TextAreaInput}
-                            rows={4}
-                            cols={30}
-                            value={prevValues?.description || ''}
+                            // value={prevValues?.description || ''}
                         />
                     </div>
 
-                    <div>
+                    <div className={cls.updateForm__input}>
                         <label htmlFor="taskCategory">Task Category</label>
                         <Field
                             name="taskCategory"
@@ -80,7 +107,7 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
                         />
                     </div>
 
-                    <div>
+                    <div className={cls.updateForm__input}>
                         <label htmlFor="deadlineTime">Deadline Time</label>
                         <Field
                             name="deadlineTime"
@@ -90,22 +117,28 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
                         />
                     </div>
 
-                    <div>
+                    <div className={cls.updateForm__input}>
                         <label htmlFor="priority">Priority</label>
                         <Field
                             name="priority"
                             as={Select}
                             options={[
-                                { value: TaskPriority.low, label: 'Low' },
-                                { value: TaskPriority.medium, label: 'Medium' },
-                                { value: TaskPriority.high, label: 'High' },
+                                {value: TaskPriority.low, label: 'Low'},
+                                {value: TaskPriority.medium, label: 'Medium'},
+                                {value: TaskPriority.high, label: 'High'},
                             ]}
                         />
                     </div>
 
-                    <button type="submit">Update</button>
+                    <Button theme={ButtonTheme.OUTLINE} className={cls.updateForm__submit} type="submit">Update</Button>
                 </Form>
             )}
         </Formik>
+        </div>
     );
+
+
 };
+
+
+

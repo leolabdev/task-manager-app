@@ -28,7 +28,7 @@ export const DeleteCategoryButton = ({ categoryId, className}: DeleteCategoryPro
             confirmLabel="Delete"
             cancelLabel="Cancel"
             onConfirm={handleDeleteCategory}
-            children={<Button theme={ButtonTheme.OUTLINE} className={className}>Delete Category</Button>}
+            children={<Button theme={ButtonTheme.OUTLINE} className={className}><span>Delete Category</span></Button>}
         />
     );
 

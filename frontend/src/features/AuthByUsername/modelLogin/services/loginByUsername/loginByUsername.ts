@@ -3,7 +3,7 @@ import axios from 'axios';
 import {IUser, userActions} from '@/entities/User';
 import {loginActions} from "../../slice/loginSlice";
 import {object, string, ValidationError} from "yup";
-import {categoriesApi, useGetCategoriesQuery} from "@/entities/Category";
+import {categoriesApi, resetCategories, useGetCategoriesQuery} from "@/entities/Category";
 
 const LoginByUsernameSchema = object().shape({
     username: string().required('Username is required')
@@ -36,6 +36,8 @@ export const loginByUsername = createAsyncThunk<IUser, LoginByUsernameProps, { r
 
             thunkAPI.dispatch(userActions.setAuthData(response.data));
             thunkAPI.dispatch(loginActions.clearForm());
+            // @ts-ignore
+            // await resetCategories();
 
             return response.data;
         } catch (e) {
