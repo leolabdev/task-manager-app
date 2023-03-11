@@ -21,4 +21,5 @@ Default.args = {
     category,
 };
 Default.decorators = [StoreDecorator({
+    user: { user: {username: 'tester', createdAt: '2023-03-09T19:56:26.883Z' , role: 'admin', _id: '1'}, token: 'teeest' },
 })];

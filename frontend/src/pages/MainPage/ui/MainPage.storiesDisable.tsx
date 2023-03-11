@@ -19,6 +19,7 @@ const Template: ComponentStory<typeof MainPage> = (args:never) => <MainPage {...
 export const Primary = Template.bind({});
 Primary.args = {};
 Primary.decorators = [StoreDecorator({
+    user: { user: {_id : '1' , username: 'user' , role: 'admin', createdAt: new Date()}, token: 'teeest' },
 })];
 
 
