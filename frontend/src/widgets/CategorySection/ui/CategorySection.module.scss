@@ -14,6 +14,35 @@
 
 }
 
+
+.categoryButtons{
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.deleteCategoryButton{
+  background-color: var(--delete-action-bg-color);
+  opacity: 0.8;
+  border: 0;
+}
+
+.deleteCategoryButton span {
+  color: var(--delete-action-color);
+}
+
+.updateCategoryButton{
+  background-color: var(--update-action-bg-color);
+  opacity: 0.8;
+  border: 0;
+}
+
+.updateCategoryButton span {
+  color: var(--update-action-color);
+}
+
+
 .tasks{
   display: flex;
   align-items: self-start;
@@ -24,20 +53,6 @@
 .taskCard{
     width: 80%;
 }
-
-//.cardButtons{
-//  display: flex;
-//  flex-direction: column;
-//  align-items: center;
-//}
-//
-//.deleteCardButton{
-//  display: flex;
-//}
-//
-//.updateCardButton{
-//
-//}
 
 
 .cardButtons {

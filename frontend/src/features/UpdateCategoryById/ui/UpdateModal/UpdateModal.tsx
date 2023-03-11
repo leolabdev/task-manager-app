@@ -1,18 +1,18 @@
 import {memo} from "react";
 import {classNames} from "@/shared/lib/classNames/classNames";
 import {Modal} from "@/shared/ui/Modal/Modal";
-import {UpdateTaskForm} from "@/features/UpdateTaskById/ui/UpdateForm/UpdateForm";
+import {UpdateCategoryForm} from "../UpdateForm/UpdateForm";
 
 interface UpdateTaskModalProps {
-    taskId: string;
+    categoryId: string;
     className?: string;
     isOpen: boolean;
     onClose: () => void;
 }
 
 
-export const UpdateTaskModal = memo(
-    ({ taskId, className = "", isOpen, onClose }: UpdateTaskModalProps) => {
+export const UpdateCategoryModal = memo(
+    ({ categoryId, className = "", isOpen, onClose }: UpdateTaskModalProps) => {
         return (
             <Modal
                 className={classNames("", {}, [className])}
@@ -20,7 +20,7 @@ export const UpdateTaskModal = memo(
                 onClose={onClose}
                 lazy
             >
-                <UpdateTaskForm taskId={taskId}/>
+                <UpdateCategoryForm categoryId={categoryId}/>
             </Modal>
         );
     }

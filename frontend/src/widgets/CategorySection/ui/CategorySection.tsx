@@ -6,6 +6,8 @@ import { TaskCard } from "@/entities/Task";
 import { ICategory } from "@/entities/Category";
 import {DeleteTaskButton} from "@/features/DeleteTaskById";
 import {UpdateTaskButton} from "@/features/UpdateTaskById";
+import {UpdateCategoryButton} from "@/features/UpdateCategoryById";
+import {DeleteCategoryButton} from "@/features/DeleteCategoryById";
 
 interface CategorySectionProps {
     className?: string;
@@ -37,13 +39,17 @@ export const CategorySection = ({ className, category }: CategorySectionProps) =
                         <div key={task._id} className={cls.tasks}>
                             <TaskCard task={task} key={task._id} className={cls.taskCard} />
                             <div className={cls.cardButtons}>
-                            <DeleteTaskButton taskId={task._id} className={cls.deleteCardButton} />
-                            <UpdateTaskButton taskId={task._id}  className={cls.updateCardButton} />
+                                <UpdateTaskButton taskId={task._id}  className={cls.updateCardButton} />
+                                <DeleteTaskButton taskId={task._id} className={cls.deleteCardButton} />
                             </div>
                         </div>
                     ))}
                 </div>
             </AccordionSection>
+            <div className={cls.categoryButtons}>
+                <UpdateCategoryButton categoryId={category._id} className={cls.updateCategoryButton}/>
+                <DeleteCategoryButton categoryId={category._id} className={cls.deleteCategoryButton}/>
+            </div>
         </div>
     );
 };

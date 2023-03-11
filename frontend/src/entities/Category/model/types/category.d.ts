@@ -10,6 +10,12 @@ export interface ICategory {
     __v?: number;
 }
 
+export interface ICategoryUpdate {
+    _id?: string;
+    taskCategoryName: string;
+}
+
+
 export interface CategoriesSchema {
     categories: ICategory[];
     loading: boolean;

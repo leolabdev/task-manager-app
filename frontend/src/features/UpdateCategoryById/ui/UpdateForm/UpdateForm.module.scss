@@ -1,0 +1,39 @@
+.UpdateForm {
+  display: flex;
+  flex-direction: column;
+  min-width: 30vw;
+}
+
+.updateForm__input {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  input {
+    height: 48px;
+    padding: 8px;
+    width: 100%;
+    max-width: 100%;
+    border: 3px solid var(--border-color);
+    border-radius: 4px;
+    font: var(--font-m);
+    background-color: var(--bg-color);
+  }
+}
+
+.updateForm__submit {
+  border: 2px solid var(--border-color);
+
+  &:hover {
+    background-color: #e5e5e5;
+  }
+}
+
+.updateForm__error {
+  color: red;
+  margin-top: 4px;
+}

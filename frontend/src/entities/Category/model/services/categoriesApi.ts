@@ -71,6 +71,8 @@ import { ICategory } from '@/entities/Category';
 import { getCookieValue } from '@/shared/lib/webStorages/getCookieValue';
 import { USER_COOKIES_TOKEN_KEY } from '@/shared/const/cookies';
 import { useDispatch } from 'react-redux';
+import {ICategoryUpdate} from "@/entities/Category/model/types/category";
+import {ITaskUpdate} from "@/entities/Task";
 
 const token = getCookieValue(USER_COOKIES_TOKEN_KEY);
 
@@ -108,7 +110,7 @@ export const categoriesApi = createApi({
             }),
             invalidatesTags: (result, error, arg) => [{ type: 'Category' as const, id: arg }],
         }),
-        updateCategory: builder.mutation<ICategory, Partial<ICategory>>({
+        updateCategory: builder.mutation<ICategoryUpdate, { _id: string, taskCategoryName: string }>({
             query: (category) => ({
                 url: `taskCategories/${category._id}`,
                 method: 'PUT',

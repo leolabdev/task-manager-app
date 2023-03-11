@@ -7,15 +7,8 @@ import {useGetCategoriesQuery} from '@/entities/Category';
 import cls from './UpdateForm.module.scss';
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import {object,string,date} from 'yup';
+import {UpdateTaskSchema} from "../../model/types/UpdateTaskSchema";
 
-interface UpdateTaskSchema {
-    _id?: string;
-    title: string;
-    description?: string;
-    taskCategory?: string;
-    deadlineTime: string;
-    priority: TaskPriority;
-}
 
 interface UpdateTaskFormProps {
     taskId: string;
