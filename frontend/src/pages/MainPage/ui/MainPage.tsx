@@ -1,13 +1,11 @@
-import { useGetCategoriesQuery } from "@/entities/Category";
-import { CategorySection } from "@/widgets/CategorySection";
+import {useGetCategoriesQuery} from "@/entities/Category";
+import {CategorySection} from "@/widgets/CategorySection";
 import {Loader} from "@/shared/ui/Loader";
-import {ExoticComponent, memo, SuspenseProps} from "react";
+import {memo} from "react";
 import {useSelector} from "react-redux";
 import {getUserAuthData} from "@/entities/User";
-import {DeleteCategoryButton} from "@/features/DeleteCategoryById"
+import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import cls from "./MainPage.module.scss";
-import {UpdateCategoryButton} from "@/features/UpdateCategoryById";
-
 
 const MainPage = memo(() => {
 
@@ -24,9 +22,18 @@ const MainPage = memo(() => {
         return <div>{error.data.message}</div>;
     }
 
+    const willBeImplemented = () => {
+        alert('Will be implemented in the near future');
+    }
+
     if(authData){
         return (
             <>
+
+                <div className={cls.addsButtons}>
+                <Button onClick={willBeImplemented} theme={ButtonTheme.OUTLINE}>Add new task</Button>
+                <Button onClick={willBeImplemented} theme={ButtonTheme.OUTLINE}>Add new Category</Button>
+                </div>
                 {categoriesData.map((category) => (
                     <div key={category._id}>
                         <CategorySection key={category._id} category={category}/>
