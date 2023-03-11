@@ -14,7 +14,9 @@ interface CategorySectionProps {
     category: ICategory;
 }
 
-export const CategorySection = ({ className, category }: CategorySectionProps) => {
+
+export const CategorySection = ( props : CategorySectionProps) => {
+    const {className, category } = props;
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     const onCollapse = useCallback(() => {
@@ -23,8 +25,6 @@ export const CategorySection = ({ className, category }: CategorySectionProps) =
 
     //  the tasks array's memoization is necessary to prevent the TaskCard component from re-rendering
     const tasks = useMemo(() => category.tasks ?? [], [category.tasks]);
-
-
 
     return (
         <div className={classNames(cls.CategorySection, {}, [className])}>
