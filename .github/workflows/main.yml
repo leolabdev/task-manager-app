@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
-        run: cd backend && npm install
+        run: cd backend && npm ci
 
   frontend:
     name: Frontend Pipeline
@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: install modules
-        run: npm ci
+        run: cd frontend && npm ci
       - name: build production project
         run: npm run build
         if: always()
