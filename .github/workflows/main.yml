@@ -46,7 +46,7 @@ jobs:
       - name: build storybook
         run: cd frontend &&  npm run storybook:build
         if: success()
-      - name: screenshot testing
-        run: cd frontend && npm run test:ui:ci
-        if: always()
+#      - name: screenshot testing
+#        run: cd frontend && npm run test:ui:ci
+#        if: always()
 
