@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import MainPage from './MainPage';
 import {StoreDecorator} from "@/shared/config/storybook/StoreDecorator/StoreDecorator";
-import {Default} from "@/widgets/CategorySection/ui/CategorySection.stories";
+
 
 export default {
     title: 'pages/MainPage',
