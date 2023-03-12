@@ -18,6 +18,12 @@
     "storybook:build": "build-storybook -c ./config/.storybook",
     "prepare": "cd .. && husky install .husky"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:unit"
+    }
+  },
+
   "dependencies": {
     "@react-buddy/ide-toolbox": "^2.3.1",
     "@reduxjs/toolkit": "^1.9.3",
