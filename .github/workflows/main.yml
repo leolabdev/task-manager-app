@@ -39,15 +39,15 @@ jobs:
       - name: install modules
         run: cd frontend && npm ci
       - name: build production project
-        run: npm run build
+        run: cd frontend && npm run build
         if: always()
       - name: unit testing
         if: always()
-        run: npm run test:unit
+        run: cd frontend &&  npm run test:unit
       - name: build storybook
-        run: npm run storybook:build
+        run: cd frontend &&  npm run storybook:build
         if: success()
       - name: screenshot testing
-        run: npm run test:ui:ci
+        run: cd frontend && npm run test:ui:ci
         if: always()
 
