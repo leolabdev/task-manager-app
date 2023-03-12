@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm --prefix ./frontend run build
+npm --prefix ./frontend run lint:scss
+npm --prefix ./frontend run test:unit
+#npm run storybook:build
+#npm run test:ui
+
+
