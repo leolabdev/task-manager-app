@@ -16,5 +16,5 @@ module.exports = {
             preset: 'A4 Paper',
         },
     },
-    fetchFailIgnore: 'localhost:1234/get',
+    // fetchFailIgnore: 'localhost:1234/get',
 };
