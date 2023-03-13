@@ -33,9 +33,11 @@ const UpdateTaskValidation = object().shape({
 export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => {
     const {data: tasks} = useGetTasksQuery();
     const task = tasks?.find((task) => task._id === taskId);
-    const {data: allCategories} = useGetCategoriesQuery();
+    const {data: allCategories , refetch} = useGetCategoriesQuery();
 
     const [updateTask, {error ,isError} ] = useUpdateTaskMutation();
+
+
 
     const categoriesForSelect = allCategories?.map((category) => ({
         label: category.taskCategoryName,
@@ -69,8 +71,8 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
             };
             await updateTask({taskId, task: taskUpdate});
             if (!isError) {
-                //todo fix this...
-                window.location.reload();
+                alert('Task updated successfully');
+                refetch();
             }
             onSubmit && onSubmit();
         } catch (error) {

@@ -1,8 +1,8 @@
 import {memo, useCallback, useEffect} from 'react';
-import { useDeleteTaskMutation, useGetTasksQuery } from '@/entities/Task';
+import {resetTasks, useDeleteTaskMutation, useGetTasksQuery} from '@/entities/Task';
 import { ActionWithConfirmDialog } from '@/shared/ui/ActionWithConfirmDialog/ActionWithConfirmDialog';
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button';
-import {resetCategories} from "@/entities/Category";
+import {resetCategories, useGetCategoriesQuery} from "@/entities/Category";
 
 interface DeleteTaskButtonProps {
     taskId: string;
@@ -10,13 +10,15 @@ interface DeleteTaskButtonProps {
 }
 
 export const DeleteTaskButton = memo(({ taskId, className }: DeleteTaskButtonProps) => {
-    const [deleteTask, { error }] = useDeleteTaskMutation();
+    const [deleteTask, { error,isSuccess }] = useDeleteTaskMutation();
+    const {refetch} = useGetCategoriesQuery();
+
     const { data } = useGetTasksQuery();
 
     const handleDeleteTask = useCallback(async () => {
         await deleteTask(taskId);
         if(!error) {
-            await resetCategories();
+            refetch();
         }
     }, [deleteTask, taskId]);
 
@@ -24,8 +26,11 @@ export const DeleteTaskButton = memo(({ taskId, className }: DeleteTaskButtonPro
         error && alert(error);
     }, [error]);
 
+
+
     const task = data?.find(task => task._id === taskId);
     const taskTitle = task ? task.title : '';
+
 
     return (
         <ActionWithConfirmDialog
