@@ -7,10 +7,17 @@ import {getUserAuthData} from "@/entities/User";
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import cls from "./MainPage.module.scss";
 
+
+
+const willBeImplemented = () => {
+    alert('Will be implemented in the near future');
+}
+
 const MainPage = memo(() => {
 
     const authData = useSelector(getUserAuthData);
-    const { data: categoriesData, isLoading, error, isError} = useGetCategoriesQuery();
+    const { data: categoriesData, isLoading, error, isError ,refetch} = useGetCategoriesQuery();
+
 
     if (isLoading) {
         return <Loader/>;
@@ -22,11 +29,10 @@ const MainPage = memo(() => {
         return <div>{error.data.message}</div>;
     }
 
-    const willBeImplemented = () => {
-        alert('Will be implemented in the near future');
-    }
+
 
     if(authData){
+        refetch();
         return (
             <>
 
