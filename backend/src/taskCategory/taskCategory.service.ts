@@ -94,7 +94,7 @@ export class TaskCategoryService{
             return await TaskCategoryModel.findByIdAndUpdate(
                 _id,
                 {taskCategoryName},
-                {new: true},
+                {new: false},
             ).populate('tasks');
         } catch (error: unknown) {
             if (error instanceof Error) {

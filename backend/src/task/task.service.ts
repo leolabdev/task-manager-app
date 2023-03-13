@@ -121,7 +121,7 @@ export class TaskService {
                     title: title ?? undefined,
                     deadlineTime: deadlineTime ?? undefined,
                 },
-                {new: true},
+                {new: false},
             )
         } catch (error: unknown) {
             if (error instanceof Error) {
