@@ -10,7 +10,7 @@ const token = getCookieValue(USER_COOKIES_TOKEN_KEY);
 
 export const categoriesApi = createApi({
     reducerPath: 'categoriesApi',
-    tagTypes: ['Category'],
+    tagTypes: ['Task', 'Category'],
     baseQuery: fetchBaseQuery({
         baseUrl: import.meta.env.VITE_API,
         headers: {
@@ -21,11 +21,9 @@ export const categoriesApi = createApi({
     }),
     endpoints: (builder) => ({
         getCategories: builder.query<ICategory[], void>({
-            query: () => 'taskCategories',
-            providesTags: result =>
-                result
-                    ? result.map(({ _id }) => ({ type: 'Category' as const, id: _id }))
-                    : [{ type: 'Category' as const, id: 'EMPTY' }],
+            query: () => 'taskCategories'
+            ,
+            providesTags: ['Category'],
         }),
         createCategory: builder.mutation<ICategory, Partial<ICategory>>({
             query: (category) => ({
@@ -33,14 +31,14 @@ export const categoriesApi = createApi({
                 method: 'POST',
                 body: category,
             }),
-            invalidatesTags: [{ type: 'Category' as const, id: 'EMPTY' }],
+            invalidatesTags: ['Category'],
         }),
         deleteCategory: builder.mutation<void, string>({
             query: (categoryId) => ({
                 url: `taskCategories/${categoryId}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Category' as const, id: arg }],
+            invalidatesTags: ['Category'],
         }),
         updateCategory: builder.mutation<ICategoryUpdate, { _id: string, taskCategoryName: string }>({
             query: (category) => ({
@@ -48,7 +46,7 @@ export const categoriesApi = createApi({
                 method: 'PUT',
                 body: category,
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Category' as const, id: arg?._id || 'EMPTY' }],
+            invalidatesTags: ['Category'],
         }),
     }),
 });
