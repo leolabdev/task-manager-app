@@ -72,7 +72,7 @@ taskSchema.pre('findOneAndUpdate', async function (next) {
         // @ts-ignore
         const conditions = this._conditions;
 
-        const oldTask = await model(SchemaRelationsEnum.TASK).findOne({tasks: conditions._id}).exec();
+        const oldTask = await model(SchemaRelationsEnum.TASK).findOne({tasks: conditions._id});
         const oldCategory = oldTask.taskCategory.toString();
 
         // @ts-ignore
