@@ -5,7 +5,7 @@ import {TaskPriorityEnum} from "@/types/schema-enums";
 
 export function createTaskValidation(task: ICreateTask) {
     const schema = Joi.object<ICreateTask>({
-        title: Joi.string().required().min(1).max(15),
+        title: Joi.string().required().min(1).max(25),
         description: Joi.string().min(3).max(500).allow("").optional(),
         taskCategory: Joi.string().required(),
         user: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
@@ -18,7 +18,7 @@ export function createTaskValidation(task: ICreateTask) {
 export function updateTaskValidation(task: IUpdateTask) {
     const schema = Joi.object<IUpdateTask>({
         _id: Joi.string().required(),
-        title: Joi.string().min(1).max(15).optional(),
+        title: Joi.string().min(1).max(25).optional(),
         description: Joi.string().min(3).max(500).allow("").optional(),
         taskCategory: Joi.string().optional(),
         priority: Joi.string().valid(...Object.values(TaskPriorityEnum)).optional(),
