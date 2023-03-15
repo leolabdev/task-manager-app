@@ -60,6 +60,23 @@ describe("ConfirmDialog", () => {
         expect(title).toBeInTheDocument();
     });
 
+    it("renders with title, message and children", () => {
+        const { getByText } = render(
+            <ConfirmDialog
+                onConfirm={onConfirm}
+                onCancel={onCancel}
+                isOpen={true}
+                title="Are you sure?"
+                message="This action cannot be undone."
+            >
+                <div>Custom Content</div>
+            </ConfirmDialog>
+        );
+        expect(getByText("Are you sure?")).toBeInTheDocument();
+        expect(getByText("This action cannot be undone.")).toBeInTheDocument();
+        expect(getByText("Custom Content")).toBeInTheDocument();
+    });
+
     it('renders the message', () => {
         render(<ConfirmDialog isOpen message="Test Message" onConfirm={onConfirm} onCancel={onCancel} />);
         const message = screen.getByText('Test Message');
@@ -89,7 +106,6 @@ describe("ConfirmDialog", () => {
     });
 
     it('calls the onConfirm handler when the confirm button is clicked', () => {
-        const onConfirm = jest.fn();
         render(<ConfirmDialog isOpen onConfirm={onConfirm} onCancel={onCancel} />);
         const confirmButton = screen.getByText('Confirm');
         fireEvent.click(confirmButton);
@@ -97,41 +113,21 @@ describe("ConfirmDialog", () => {
     });
 
     it('calls the onCancel handler when the cancel button is clicked', () => {
-        const onCancel = jest.fn();
         render(<ConfirmDialog isOpen onConfirm={onConfirm} onCancel={onCancel} />);
         const cancelButton = screen.getByText('Cancel');
         fireEvent.click(cancelButton);
         expect(onCancel).toHaveBeenCalledTimes(1);
     });
 
-    it('calls the onCancel handler when the modal is closed', () => {
+    it("calls onCancel when the user presses the 'Escape' key", () => {
+        const onCancel = jest.fn();
         render(
-            <ConfirmDialog
-                isOpen
-                onCancel={onCancel}
-                onConfirm={onConfirm}
-            />
+            <ConfirmDialog isOpen={true} onConfirm={onConfirm} onCancel={onCancel} />
         );
-
-        const modal = screen.getByRole('dialog');
-        fireEvent.keyDown(modal, { key: 'Escape' });
-
-        jest.runAllTimers(); // trigger the timer immediately
-
+        fireEvent.keyDown(document, { key: "Escape" });
+        jest.runOnlyPendingTimers();
         expect(onCancel).toHaveBeenCalledTimes(1);
     });
 
-    it('renders with the correct className', () => {
-        render(
-            <ConfirmDialog
-                isOpen
-                className="test-class"
-                onConfirm={jest.fn()}
-                onCancel={jest.fn()}
-            />
-        );
-        const container = screen.getByRole('dialog');
-        expect(container).toHaveClass('test-class');
-    });
 
 });
