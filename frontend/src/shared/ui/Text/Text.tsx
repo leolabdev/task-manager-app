@@ -25,9 +25,9 @@ export const Text = memo((props: TextProps) => {
     } = props;
 
     return (
-        <div className={classNames(cls.Text, {}, [className , cls[theme]])}>
-            {title && <h3 className={cls.title}>{title}</h3>}
-            {text && <p className={cls.text}>{text}</p>}
+        <div data-testid="text" className={classNames(cls.Text, {}, [className , cls[theme]])}>
+            {title && <h3 data-testid="text-title" className={cls.title}>{title}</h3>}
+            {text && <p data-testid="text-content" className={cls.text}>{text}</p>}
         </div>
     );
 });

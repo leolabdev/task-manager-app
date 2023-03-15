@@ -1,4 +1,4 @@
-import {ReactNode, useEffect, useLayoutEffect, useState} from "react";
+import {ReactNode} from "react";
 import { createPortal } from "react-dom";
 
 interface PortalProps {
@@ -9,9 +9,7 @@ interface PortalProps {
 
 
 
-
-
-// // //todo for some reason storybook doesn't work with this correctly, it loozes styles
+// // //todo for some reason storybook doesn't work with this correctly, it looses styles
 export const Portal = (props: PortalProps) => {
 
     const { children, element = document.body } = props;

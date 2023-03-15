@@ -8,9 +8,6 @@ import {ITaskUpdate} from "../types/task";
 const token = getCookieValue(USER_COOKIES_TOKEN_KEY);
 
 
-
-
-
 export const tasksApi = createApi({
     reducerPath: 'tasksApi',
     tagTypes: ['Task'],
@@ -29,7 +26,7 @@ export const tasksApi = createApi({
         }),
         getTask: builder.query<ITask, string>({
             query: (taskId) => `tasks/${taskId}`,
-            providesTags: ['Task',],
+            providesTags: ['Task'],
         }),
         createTask: builder.mutation<ITask, Omit<ITask, '_id'>>({
             query: (task) => ({

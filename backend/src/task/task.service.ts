@@ -112,7 +112,8 @@ export class TaskService {
         try {
             const {taskCategory,description,priority,title,deadlineTime, _id} = taskBody;
 
-            return await TaskModel.findOneAndUpdate(
+            // return await TaskModel.findOneAndUpdate(
+            return TaskModel.findOneAndUpdate(
             {_id},
                 {
                     taskCategory: taskCategory ?? undefined,
@@ -121,7 +122,8 @@ export class TaskService {
                     title: title ?? undefined,
                     deadlineTime: deadlineTime ?? undefined,
                 },
-                {new: false},
+                // {new: true},
+                {new: true},
             )
         } catch (error: unknown) {
             if (error instanceof Error) {

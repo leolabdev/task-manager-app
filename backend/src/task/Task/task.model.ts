@@ -1,6 +1,7 @@
 import  {model,Model, Schema} from "mongoose";
 import {ITask} from "./task";
 import {SchemaRelationsEnum, TaskPriorityEnum} from "@/types/schema-enums";
+import {TaskCategoryModel} from "@/taskCategory/TaskCategory/taskCategory.model";
 
 
 const taskSchema = new Schema<ITask>({
@@ -58,7 +59,7 @@ taskSchema.pre<ITask>("remove", async function (next) {
         // Update the task category's tasks array
         await model(SchemaRelationsEnum.TASK_CATEGORY).findById(this.taskCategory)
             .updateOne({$pull: {tasks: this._id}})
-            .exec();
+            // .exec();
         next();
     } catch (error:  any) {
         next(error);
@@ -66,32 +67,28 @@ taskSchema.pre<ITask>("remove", async function (next) {
 });
 
 
-
 taskSchema.pre('findOneAndUpdate', async function (next) {
     try {
-        // @ts-ignore
-        const conditions = this._conditions;
+        // Get the conditions and update object from the query
+        const { _id: taskId } = this.getQuery();
+        const update = this.getUpdate();
 
-        const oldTask = await model(SchemaRelationsEnum.TASK).findOne({tasks: conditions._id});
-        const oldCategory = oldTask.taskCategory.toString();
-
+        // Find the task document to get the old task category
+        const task = await TaskModel.findById(taskId);
         // @ts-ignore
-        const updateTask = this._update;
-        const updateCategory = updateTask.taskCategory.toString();
+        const oldCategory = task.taskCategory.toString();
 
         // Only call the hook if the "taskCategory" field has been modified
-        if (oldCategory !== updateCategory) {
-            // Remove the task from the old task category's tasks array
-            await model(SchemaRelationsEnum.TASK_CATEGORY).findById(oldCategory)
-                .updateOne({$pull: {tasks: conditions._id}});
-            // Add the task to the new task category's tasks array
-            await model(SchemaRelationsEnum.TASK_CATEGORY).findById(updateCategory)
-                .updateOne({$push: {tasks: conditions._id}});
-        }
-
-        next();
-    } catch (error) {
         // @ts-ignore
+        if (update && update.taskCategory && update.taskCategory.toString() !== oldCategory) {
+            // Remove the task from the old task category's tasks array
+            await model(SchemaRelationsEnum.TASK_CATEGORY).findByIdAndUpdate(oldCategory, { $pull: { tasks: taskId } });
+            // Add the task to the new task category's tasks array
+            // @ts-ignore
+            await model(SchemaRelationsEnum.TASK_CATEGORY).findByIdAndUpdate(update.taskCategory.toString(), { $push: { tasks: taskId } });
+        }
+        next();
+    } catch (error : any) {
         next(error);
     }
 });

@@ -23,7 +23,7 @@ export class TaskController {
     }
 
     // admin
-    // todo implement fabrics for all methods
+    // todo implement factories for all methods
     getAllTasks = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const getAllHandler = createGetAllHandler(this.taskService, (e: unknown) => logger.error(e));
         await  getAllHandler(req, res, next);

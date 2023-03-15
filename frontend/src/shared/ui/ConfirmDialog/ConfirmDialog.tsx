@@ -14,6 +14,7 @@ interface ConfirmDialogProps {
     onCancel: () => void;
     className?: string;
     children?: ReactNode;
+    role?: string;
 }
 
 export const ConfirmDialog = memo(
@@ -26,15 +27,17 @@ export const ConfirmDialog = memo(
          onConfirm,
          onCancel,
          className = "",
-         children
+         children,
      }: ConfirmDialogProps) => {
         return (
+            <div role="dialog">
             <Modal
                 className={classNames(cls.ConfirmDialog, {}, [className])}
-        isOpen={isOpen}
-        onClose={onCancel}
-        lazy
-        >
+                isOpen={isOpen}
+                onClose={onCancel}
+                lazy
+                aria-labelledby="confirm-dialog-title"
+            >
                 {title && <div className={cls.title}>{title}</div>}
                 {message && <div className={cls.message}>{message}</div>}
                 {children && <div className={cls.children}>{children}</div>}
@@ -55,6 +58,7 @@ export const ConfirmDialog = memo(
             </Button>
             </div>
             </Modal>
+            </div>
     );
     }
 );

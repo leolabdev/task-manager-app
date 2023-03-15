@@ -31,6 +31,8 @@ export const registerByUsername = createAsyncThunk<
             authData
         );
 
+        console.log(response)
+
         if (!response.data) {
             throw new Error();
         }
@@ -39,6 +41,7 @@ export const registerByUsername = createAsyncThunk<
     } catch (e) {
         if (e instanceof ValidationError) {
             // If authData is not valid, return validation error using rejectWithValue
+
             return thunkAPI.rejectWithValue(e.errors[0]);
         }
 

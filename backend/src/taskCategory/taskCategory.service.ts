@@ -87,14 +87,16 @@ export class TaskCategoryService{
     }
 
 
+    // update = async (taskCategoryBody: IUpdateTaskCategory): Promise<ITaskCategory | null> => {
     update = async (taskCategoryBody: IUpdateTaskCategory): Promise<ITaskCategory | null> => {
         try {
             const {taskCategoryName, _id} = taskCategoryBody;
 
             return await TaskCategoryModel.findByIdAndUpdate(
-                _id,
+                {_id},
                 {taskCategoryName},
-                {new: false},
+                // {new: true},
+                {new: true},
             ).populate('tasks');
         } catch (error: unknown) {
             if (error instanceof Error) {

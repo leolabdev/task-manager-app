@@ -38,6 +38,13 @@ export const Modal = memo((props: ModalProps) => {
       },
       [isOpen]);
 
+    // //todo: check if this is needed
+    useEffect(() => {
+        if (lazy && !isOpen) {
+            setIsMounted(false);
+        }
+    }, [isOpen, lazy]);
+
 
     const closeHandler = useCallback(() => {
         if (onClose) {
@@ -63,9 +70,9 @@ export const Modal = memo((props: ModalProps) => {
         [closeHandler]
     );
 
-    const onContentClick = (e: MouseEvent<HTMLDivElement>) => {
+    const onContentClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
-    };
+    }, []);
 
     // timeout is used to enable onMount animation
     useEffect(() => {
@@ -97,8 +104,8 @@ export const Modal = memo((props: ModalProps) => {
 
     return (
         <Portal>
-            <div className={classNames(cls.Modal, mods, [className])}>
-                <div className={cls.overLay} onClick={closeHandler}>
+            <div data-testid="modal" className={classNames(cls.Modal, mods, [className])}>
+                <div data-testid="overlay" className={cls.overLay} onClick={closeHandler}>
                     <div className={cls.content} onClick={onContentClick}>
                         {children}
                     </div>

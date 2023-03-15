@@ -46,5 +46,14 @@ describe("Button", () => {
         expect(screen.getByRole('button')).not.toHaveClass('square');
     });
 
+    it('memorizes the component', () => {
+        const handleClick = jest.fn();
+        const { rerender, getByText } = render(<Button onClick={handleClick}>Test</Button>);
+        const initialRender = getByText('Test');
+        rerender(<Button onClick={handleClick}>Test</Button>);
+        const memoizedRender = getByText('Test');
+        expect(initialRender).toBe(memoizedRender);
+    });
+
 });
 
