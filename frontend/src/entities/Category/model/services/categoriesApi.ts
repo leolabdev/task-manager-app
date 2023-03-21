@@ -3,8 +3,6 @@ import { ICategory } from '@/entities/Category';
 import { getCookieValue } from '@/shared/lib/webStorages/getCookieValue';
 import { USER_COOKIES_TOKEN_KEY } from '@/shared/const/cookies';
 import { useDispatch } from 'react-redux';
-import {ICategoryUpdate} from "@/entities/Category/model/types/category";
-
 
 const token = getCookieValue(USER_COOKIES_TOKEN_KEY);
 
@@ -25,7 +23,7 @@ export const categoriesApi = createApi({
             ,
             providesTags: ['Category'],
         }),
-        createCategory: builder.mutation<ICategory, Partial<ICategory>>({
+        createCategory: builder.mutation<ICategory, Pick<ICategory, 'taskCategoryName'>>({
             query: (category) => ({
                 url: 'taskCategories',
                 method: 'POST',
@@ -33,14 +31,14 @@ export const categoriesApi = createApi({
             }),
             invalidatesTags: ['Category'],
         }),
-        deleteCategory: builder.mutation<void, string>({
+        deleteCategory: builder.mutation<void, Pick<ICategory,'_id'>>({
             query: (categoryId) => ({
                 url: `taskCategories/${categoryId}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Category'],
         }),
-        updateCategory: builder.mutation<ICategoryUpdate, { _id: string, taskCategoryName: string }>({
+        updateCategory: builder.mutation<ICategory, Pick<ICategory, '_id' | 'taskCategoryName'>>({
             query: (category) => ({
                 url: `taskCategories/${category._id}`,
                 method: 'PUT',

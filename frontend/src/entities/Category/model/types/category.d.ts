@@ -11,7 +11,7 @@ export interface ICategory {
 }
 
 export interface ICategoryUpdate {
-    _id?: string;
+    _id: string;
     taskCategoryName: string;
 }
 

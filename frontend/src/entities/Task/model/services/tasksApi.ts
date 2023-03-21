@@ -3,7 +3,7 @@ import { ITask } from '@/entities/Task';
 import { getCookieValue } from '@/shared/lib/webStorages/getCookieValue';
 import { USER_COOKIES_TOKEN_KEY } from '@/shared/const/cookies';
 import {useDispatch, useSelector} from 'react-redux';
-import {ITaskUpdate} from "../types/task";
+import {ITaskCreate, ITaskUpdate} from "../types/task";
 
 const token = getCookieValue(USER_COOKIES_TOKEN_KEY);
 
@@ -24,11 +24,11 @@ export const tasksApi = createApi({
             query: () => 'tasks',
             providesTags: ['Task'],
         }),
-        getTask: builder.query<ITask, string>({
-            query: (taskId) => `tasks/${taskId}`,
+        getTask: builder.query<ITask, Pick<ITask, '_id'>>({
+            query: (_id) => `tasks/${_id}`,
             providesTags: ['Task'],
         }),
-        createTask: builder.mutation<ITask, Omit<ITask, '_id'>>({
+        createTask: builder.mutation<ITask, ITaskCreate>({
             query: (task) => ({
                 url: 'tasks',
                 method: 'POST',
@@ -36,7 +36,7 @@ export const tasksApi = createApi({
             }),
             invalidatesTags: ['Task'],
         }),
-        deleteTask: builder.mutation<void, string>({
+        deleteTask: builder.mutation<void, Pick<ITask, '_id'>>({
             query: (taskId) => ({
                 url: `tasks/${taskId}`,
                 method: 'DELETE',
