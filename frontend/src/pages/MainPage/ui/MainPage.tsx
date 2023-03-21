@@ -1,12 +1,12 @@
 import {useGetCategoriesQuery} from "@/entities/Category";
 import {CategorySection} from "@/widgets/CategorySection";
 import {Loader} from "@/shared/ui/Loader";
-import {memo, useEffect, useLayoutEffect} from "react";
+import {memo} from "react";
 import {useSelector} from "react-redux";
 import {getUserAuthData} from "@/entities/User";
-import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import cls from "./MainPage.module.scss";
 import {PostCategoryButton} from "@/features/PostNewCategory";
+import {PostTaskButton} from "@/features/PostNewTask";
 
 
 const MainPage = memo(() => {
@@ -32,8 +32,8 @@ const MainPage = memo(() => {
         return (
             <>
                 <div className={cls.addsButtons}>
-                    <Button onClick={willBeImplemented} theme={ButtonTheme.OUTLINE}>Add new task</Button>
                     <PostCategoryButton>Add new Category</PostCategoryButton>
+                    <PostTaskButton>Add new Task</PostTaskButton>
                 </div>
                 {categoriesData.map((category) => (
                     <div key={category._id}>
