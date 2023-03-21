@@ -35,12 +35,14 @@ const MainPage = memo(() => {
                     <PostCategoryButton>Add new Category</PostCategoryButton>
                     <PostTaskButton>Add new Task</PostTaskButton>
                 </div>
+                <div className={cls.categorySections}>
                 {categoriesData.map((category) => (
                     <div key={category._id}>
                         <CategorySection key={category._id} category={category}/>
                     </div>
                 ))
                 }
+                </div>
             </>
         );
     }
