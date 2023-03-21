@@ -1,38 +1,33 @@
-import {Document, ObjectId, Schema} from "mongoose";
-import {UserRole} from "@/user";
+import {ObjectId, Schema} from "mongoose";
+import {UserRole} from "./userRole";
 
 
-interface IUser extends Document {
-    _id?: ObjectId;
+interface IUser {
+    _id: ObjectId;
     username: string;
     password: string;
-    role: string;
+    role: UserRole;
     tasks: Schema.Types.ObjectId[];
     taskCategories: Schema.Types.ObjectId[];
     createdAt : Date;
     updatedAt : Date;
 }
 
-interface IUserWithoutPassword {
-    _id: ObjectId;
-    username: string;
-    role: UserRole;
-    tasks: Schema.Types.ObjectId[];
-    taskCategories: Schema.Types.ObjectId[];
-    createdAt: Date;
-    updatedAt: Date;
-}
+// interface IUserWithoutPassword {
+//     _id: ObjectId;
+//     username: string;
+//     role: UserRole;
+//     tasks: Schema.Types.ObjectId[];
+//     taskCategories: Schema.Types.ObjectId[];
+//     createdAt: Date;
+//     updatedAt: Date;
+// }
 
-interface ICreateUser {
-    username: string;
-    password: string;
-}
+type IUserWithoutPassword = Omit<IUser , 'password'>
 
-interface IUpdateUser{
-    id?: string;
-    username: string;
-    password: string;
-    role: UserRole;
-}
+type ICreateUser = Pick<IUser, "username" | "password">;
+//
+type IUpdateUser = Pick<IUser, "_id" | "username" | "password" | "role"> & {};
+
 
 export { IUser,ICreateUser,IUpdateUser,IUserWithoutPassword }

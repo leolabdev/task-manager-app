@@ -14,8 +14,6 @@ export class UserService {
         this.taskCategoryService = new TaskCategoryService(new TaskService());
     }
 
-
-
     getByUserName = async (username: string): Promise<IUser | null> =>  {
         try {
             return await UserModel.findOne({username})
@@ -71,8 +69,8 @@ export class UserService {
 
    updateUser = async (userBody: IUpdateUser): Promise<IUser | null> =>{
     try {
-      const { id, username, password, role } = userBody;
-      return await UserModel.findByIdAndUpdate(id, { username, password ,role }, { new: true }).exec();
+      const { _id, username, password, role } = userBody;
+      return await UserModel.findByIdAndUpdate(_id, { username, password ,role }, { new: true }).exec();
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Error updating user: ${error.message}`);

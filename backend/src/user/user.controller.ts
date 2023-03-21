@@ -41,7 +41,7 @@ export class UserController {
             if (!user) throw new HttpException(404, 'User not found');
 
             const userWithoutPassword: IUserWithoutPassword = {
-                _id: user.id,
+                _id: user._id,
                 username: user.username,
                 tasks: user.tasks,
                 taskCategories: user.taskCategories,
@@ -124,7 +124,7 @@ export class UserController {
             }
 
             const userWithoutPassword: IUserWithoutPassword = {
-                _id: user.id,
+                _id: user._id,
                 username: user.username,
                 tasks: user.tasks,
                 taskCategories: user.taskCategories,
@@ -245,15 +245,14 @@ export class UserController {
                 throw new HttpException(404, 'User not found');
             }
 
-            if (req.user && req.user.userId !== user.id && req.user.role !== UserRole.admin) {
-                throw new HttpException(403, 'Not authorized to delete this user');
-            }
-
-            res.clearCookie(CookieEnum.token);
+            // if (req.user && req.user.userId && req.user.userId.toString() !== user._id.toString() && req.user.role !== UserRole.admin) {
+            //     throw new HttpException(403, 'Not authorized to delete this user');
+            // }
 
             await this.userService.deleteUser(id);
-
+            res.clearCookie(CookieEnum.token);
             res.status(204).send();
+
         } catch (e: unknown) {
             logger.error(e);
             next(e);

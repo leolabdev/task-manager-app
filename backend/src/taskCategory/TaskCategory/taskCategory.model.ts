@@ -1,4 +1,4 @@
-import {CallbackError, CallbackWithoutResultAndOptionalError, model, Model, Schema, Types} from "mongoose";
+import {model, Model, Schema} from "mongoose";
 import {ITaskCategory} from "./taskCategory";
 import {SchemaRelationsEnum} from "@/types/schema-enums";
 

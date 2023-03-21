@@ -8,26 +8,13 @@ interface ITaskCategory extends Document {
     tasks?: Schema.Types.ObjectId[];
 }
 
+interface ICreateTaskCategory extends Pick<ITaskCategory, 'taskCategoryName'>{}
 
-interface ICreateTaskCategory {
-    taskCategoryName: string;
-}
+interface ICreateTaskCategoryWithUserId extends ICreateTaskCategory, Pick<ITaskCategory, 'user'>{}
 
-interface ICreateTaskCategoryWithUserId extends ICreateTaskCategory{
-    user: Schema.Types.ObjectId;
-}
+interface IUpdateTaskCategory extends Pick<ITaskCategory, '_id' | 'taskCategoryName'>{}
 
-interface IUpdateTaskCategory {
-    _id: string;
-    taskCategoryName: string;
-    // user: Schema.Types.ObjectId;
-    // tasks: Schema.Types.ObjectId[];
-}
-
-interface IDeleteTaskCategory {
-    _id: string;
-}
-
+interface IDeleteTaskCategory extends Pick<ITaskCategory, '_id'>{}
 
 
 export { ITaskCategory,ICreateTaskCategory,IUpdateTaskCategory,IDeleteTaskCategory,ICreateTaskCategoryWithUserId}
