@@ -11,7 +11,6 @@ const taskSchema = new Schema<ITask>({
     },
     description: {
         type: String,
-        required: true
     },
     taskCategory: {
         type: Schema.Types.ObjectId,
