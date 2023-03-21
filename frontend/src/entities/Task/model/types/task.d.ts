@@ -16,11 +16,11 @@ export interface ITask {
     deadlineTime: string;
 }
 
-export interface ITaskUpdate extends Omit<ITask, 'taskCategory'>{
+export interface ITaskUpdate extends Omit<ITask, 'taskCategory'|'user'>{
     taskCategory : string;
 }
 
-export interface ITaskCreate extends Omit<ITask, 'taskCategory' |'_id'>{
+export interface ITaskCreate extends Omit<ITask, 'taskCategory' |'_id' | 'user'>{
     taskCategory : string;
 }
 
