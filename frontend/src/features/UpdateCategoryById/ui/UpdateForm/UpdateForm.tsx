@@ -40,6 +40,7 @@ export const UpdateCategoryForm: FC<UpdateCategoryFormProps> = memo(({ categoryI
     return (
         <div className={cls.UpdateForm}>
             {isSuccess && <div className={cls.updateForm__success}>Category updated successfully</div>}
+            {isError && <div className={cls.updateForm__error}>Error updating category</div>}
             <Formik initialValues={prevValues || {} as UpdateCategorySchema} onSubmit={handleUpdateCategory} validationSchema={UpdateCategoryValidation}>
                 {({ errors, touched }) => (
                     <Form>
@@ -50,9 +51,6 @@ export const UpdateCategoryForm: FC<UpdateCategoryFormProps> = memo(({ categoryI
                                 <div className={cls.updateForm__error}>{errors.taskCategoryName}</div>
                             )}
                         </div>
-
-                        {isError && <div className={cls.updateForm__error}>Error updating category</div>}
-
                         <Button theme={ButtonTheme.OUTLINE} className={cls.updateForm__submit} type="submit">
                             Update
                         </Button>

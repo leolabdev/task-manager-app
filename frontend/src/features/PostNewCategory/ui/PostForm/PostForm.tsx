@@ -27,6 +27,7 @@ export const PostCategoryForm: FC<PostCategoryFormProps> = memo(({ onSubmit }) =
     return (
         <div className={cls.PostForm}>
             {isSuccess && <div className={cls.postForm__success}>Category added successfully</div>}
+            {isError && <div className={cls.postForm__error}>Error posting category</div>}
             <Formik initialValues={{ taskCategoryName: '' } as PostCategorySchema} onSubmit={handlePostCategory} validationSchema={PostCategoryValidation}>
                 {({ errors, touched }) => (
                     <Form>
@@ -37,9 +38,6 @@ export const PostCategoryForm: FC<PostCategoryFormProps> = memo(({ onSubmit }) =
                                 <div className={cls.postForm__error}>{errors.taskCategoryName}</div>
                             )}
                         </div>
-
-                        {isError && <div className={cls.postForm__error}>Error posting category</div>}
-
                         <Button theme={ButtonTheme.OUTLINE} className={cls.postForm__submit} type="submit">
                             Add new
                         </Button>

@@ -35,7 +35,7 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
     const task = tasks?.find((task) => task._id === taskId);
     const {data: allCategories , refetch} = useGetCategoriesQuery();
 
-    const [updateTask, {error ,isError} ] = useUpdateTaskMutation();
+    const [updateTask, {error ,isError,isSuccess} ] = useUpdateTaskMutation();
 
 
 
@@ -47,6 +47,7 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
 
     const prevValues: UpdateTaskSchema | undefined = task
         ? {
+            // @ts-ignore
             taskCategory: task.taskCategory._id,
             title: task.title,
             description: task.description,
@@ -71,7 +72,6 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
             };
             await updateTask({taskId, task: taskUpdate});
             if (!isError) {
-                alert('Task updated successfully');
                 refetch();
             }
             onSubmit && onSubmit();
@@ -85,6 +85,8 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
 
     return (
         <div className={cls.UpdateForm}>
+            {isError && <div className={cls.updateForm__error}>Error updating task</div>}
+            {isSuccess && <div className={cls.updateForm__success}>Task updated successfully</div>}
             <Formik
                 initialValues={prevValues || {} as UpdateTaskSchema}
                 onSubmit={handleUpdateTask}
@@ -142,7 +144,7 @@ export const UpdateTaskForm: FC<UpdateTaskFormProps> = ({taskId, onSubmit,}) => 
                             {errors.priority && touched.priority && <div className={cls.updateForm__error}>{errors.priority}</div>}
                         </div>
 
-                        {isError && <div className={cls.updateForm__error}>Error updating task</div>}
+
 
                         <Button theme={ButtonTheme.OUTLINE} className={cls.updateForm__submit} type="submit">Update</Button>
                     </Form>
