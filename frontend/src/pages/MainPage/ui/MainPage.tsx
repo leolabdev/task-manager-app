@@ -1,7 +1,7 @@
-import {useGetCategoriesQuery} from "@/entities/Category";
+import {useGetCategoriesQuery, useLazyGetCategoriesQuery} from "@/entities/Category";
 import {CategorySection} from "@/widgets/CategorySection";
 import {Loader} from "@/shared/ui/Loader";
-import {memo} from "react";
+import {memo, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {getUserAuthData} from "@/entities/User";
 import cls from "./MainPage.module.scss";
@@ -11,24 +11,32 @@ import {PostTaskButton} from "@/features/PostNewTask";
 
 const MainPage = memo(() => {
 
+
     const authData = useSelector(getUserAuthData);
-    const { data: categoriesData, isLoading, error, isError} = useGetCategoriesQuery();
+    const { data: categoriesData, isLoading, error, isError,refetch} = useGetCategoriesQuery();
+
+    // const [triggerGetCategories, { isLoading, isError, data: categoriesData, error } ] = useLazyGetCategoriesQuery();
+
+    useEffect(() => {
+
+        //todo fix!!!
+        if (authData && error) {
+            window.location.reload();
+        }
+    }, [authData]);
 
     if (isLoading) {
         return <Loader/>;
     }
 
     // @ts-ignore
-    if (isError && error.data) {
+    if (isError) {
         // @ts-ignore
         return <div>{error.data.message}</div>;
     }
 
-    const willBeImplemented = async () => {
-        alert('Will be implemented in the near future');
-    }
-
     if(authData){
+        if(categoriesData)
         return (
             <>
                 <div className={cls.addsButtons}>

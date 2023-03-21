@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import { ICategory } from '@/entities/Category';
 import { getCookieValue } from '@/shared/lib/webStorages/getCookieValue';
 import { USER_COOKIES_TOKEN_KEY } from '@/shared/const/cookies';
@@ -48,6 +48,8 @@ export const categoriesApi = createApi({
         }),
     }),
 });
+
+export const useLazyGetCategoriesQuery = () => categoriesApi.endpoints.getCategories.useLazyQuery();
 
 export const {
     useGetCategoriesQuery,
