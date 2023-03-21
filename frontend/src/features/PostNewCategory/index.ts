@@ -1,0 +1,1 @@
+export {PostCategoryButton} from './ui/PostCategoryButton/PostCategoryButton';

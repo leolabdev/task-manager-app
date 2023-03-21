@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {getUserAuthData} from "@/entities/User";
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button";
 import cls from "./MainPage.module.scss";
+import {PostCategoryButton} from "@/features/PostNewCategory";
 
 
 const MainPage = memo(() => {
@@ -27,15 +28,12 @@ const MainPage = memo(() => {
         alert('Will be implemented in the near future');
     }
 
-
-
     if(authData){
         return (
             <>
-
                 <div className={cls.addsButtons}>
-                <Button onClick={willBeImplemented} theme={ButtonTheme.OUTLINE}>Add new task</Button>
-                <Button onClick={willBeImplemented} theme={ButtonTheme.OUTLINE}>Add new Category</Button>
+                    <Button onClick={willBeImplemented} theme={ButtonTheme.OUTLINE}>Add new task</Button>
+                    <PostCategoryButton>Add new Category</PostCategoryButton>
                 </div>
                 {categoriesData.map((category) => (
                     <div key={category._id}>
